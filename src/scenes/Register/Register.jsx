@@ -1,15 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+
+// REGEX pattern to check the validity of the password entry
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
 
 export default function Register() {
+    // Store navigation function, this allows some navigation methods
+    const navigate = useNavigate();
+    const emailRef = useRef(null);
+    const errRef = useRef(null);
+
+    // Email states
     const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
+
+    // Password states
     const [pass, setPass] = useState('');
+    const [validPass, setValidPass] = useState(false);
+    const [passFocus, setPassFocus] = useState(false);
+
+    // Password Confimation states
+    const [matchPass, setMatchPass] = useState('');
+    const [validMatch, setValidMatch] = useState(false);
+    const [matchFocus, setMatchFocus] = useState(false);
+
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        if (emailRef.current) {
+            emailRef.current.focus();
+        }
+    }, [])
+
+    useEffect(() => {
+        const result = PWD_REGEX.test(pass);
+        setValidPass(result);
+        const match = pass === matchPass;
+        setValidMatch(match);
+    }, [email, pass, matchPass])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, pass, matchPass])
 
     const handleSubmit = async(e) => {
         e.preventDefault();
 
+        // Guard against button being re-enabled via inspect element
+        const v1 = PWD_REGEX.test(pass);
+        if (!v1) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+
         const bodyData = JSON.stringify({ email: email, pass: pass });
 
-        const response = await fetch('/api/users', {
+        const response = await fetch('/api/users/create', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -19,6 +67,8 @@ export default function Register() {
         if (response.ok){
             const json = await response.json();
             console.log(json);
+        } else {
+            setErrMsg(response.message);
         }
     }
 
@@ -31,6 +81,11 @@ export default function Register() {
                 <h2 className='register-subtitle'>
                     Please fill-out the form to Create an Account
                 </h2>
+                <span
+                    ref={errRef}
+                    aria-live="assertive">
+                        {errMsg}
+                    </span>
                 <div className='form-section'>
                     <label htmlFor='email'>E-Mail</label>
                     <input
@@ -39,22 +94,44 @@ export default function Register() {
                         className='form-input' 
                         name='email' 
                         type='email' 
-                        autoCapitalize='false' 
-                        autoCorrect='false' 
-                        autoFocus 
+                        autoCapitalize='none' 
+                        autoCorrect='none'
+                        autoComplete='off'
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
+                        autoFocus
                         required />
                 </div>
                 <div className='form-section'>
                     <label htmlFor='password'>Password</label>
                     <input
                         onChange={(e) => setPass(e.target.value)}
+                        onFocus={() => setPassFocus(true)}
+                        onBlur={() => setPassFocus(false)}
                         id='password' 
                         className='form-input' 
                         name='password' 
                         type='password' 
-                        autoCapitalize='false' 
-                        autoCorrect='false' 
+                        autoCapitalize='none' 
+                        autoCorrect='none'
+                        aria-invalid={validPass ? "false" : "true"}
                         required />
+                </div>
+                <div className='form-section'>
+                    <label htmlFor='confirm-password'>Confirm Password</label>
+                    <input
+                        id="confirm-password"
+                        name="confirm-password"
+                        type='password'
+                        className='form-input'
+                        autoCapitalize='none'
+                        autoCorrect='none'
+                        onChange={(e) => setMatchPass(e.target.value)}
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)}
+                        aria-invalid={validMatch ? "false" : "true"}>
+
+                    </input>
                 </div>
                 <button type='submit' className='form-btn'>Sign-Up</button>
             </form>
