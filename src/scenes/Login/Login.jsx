@@ -20,6 +20,7 @@ export default function Login() {
         });
         if (response.ok){
             const json = await response.json();
+            localStorage.setItem('token', json.token);
             console.log(json);
             navigate(-1);
         }
