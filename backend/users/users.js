@@ -77,15 +77,31 @@ const signInUser = async (email, pass) => {
                     id: user._id,
                     email: user.email,
                     role: user.role,
-                    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30)
                 };
                 // JWTs must be signed with a secret key; best practice would be to store the secret in a .env
                 // Anyone with the secret key can decode the JWT and get the user information, re-encode it and user
                 // it maliciously
-                const token = jwt.sign(payload, 'mysecretkey');
-                console.log("Successfully signed-in user and created their JSONWebToken!");
-                // Return the token to the main API file
-                return { message: "Login Successful", token: token };
+
+                // We're going to generate an accessToken and a refreshToken. AccessTokens expire quickly to prevent a
+                // bad actor from stealing your token and using it in your name. RefreshTokens are used to generate a
+                // new accessToken after it expires
+                const accessToken = jwt.sign(
+                    payload,
+                    'mysecretaccesskey',
+                    {
+                        expiresIn: '15m'
+                    }
+                )
+                const refreshToken = jwt.sign(
+                    payload,
+                    'mysecretrefreshkey',
+                    {
+                        expiresIn: '30d'
+                    }
+                )
+                console.log("Successfully signed-in user and created their JSONWebTokens!");
+                // Return both tokens and the User's role to the main API file
+                return { message: "Login Successful", role: user.role, accessToken: accessToken, refreshToken: refreshToken };
             }
         }
     } catch (err) {
@@ -94,7 +110,44 @@ const signInUser = async (email, pass) => {
     }
 }
 
+const handleRefreshToken = async (refreshToken) => {
+    console.log("Attempting to refresh user's access token...");
+    // Create refrences in the functions scope to access them after the internal function
+    let accessToken = '';
+    let role = '';
+
+    // This is used to decode the JWT and get access to the data inside to sign a new
+    // access token
+    jwt.verify(
+        refreshToken,
+        'mysecretrefreshkey',
+        (err, decoded) => {
+            // If there's an error return a 403
+            if (err) {
+                return { status: 403 }
+            }
+            // Payload changes to use decoded as the base
+            const payload = {
+                id: decoded._id,
+                email: decoded.email,
+                role: decoded.role,
+            };
+            // Create new access token
+            accessToken = jwt.sign(
+                payload,
+                'mysecretaccesskey',
+                { expiresIn: '15m' }
+            )
+            // Success!
+            console.log("User access token refreshed!");
+            role = decoded.role;
+        }
+    )
+    return { message: "Refreshed Access Token!", role: role, accessToken: accessToken };
+}
+
 module.exports = {
     createUser,
-    signInUser
+    signInUser,
+    handleRefreshToken
 }
