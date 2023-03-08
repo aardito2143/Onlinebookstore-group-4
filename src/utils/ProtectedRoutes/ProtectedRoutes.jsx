@@ -1,11 +1,14 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ProtectedRoutes = () => {
-    const isAdmin = true;
+    const { auth } = useAuth();
     const location = useLocation();
 
     return (
-        isAdmin ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />
+        auth?.role === 'admin' 
+            ? <Outlet /> 
+            : <Navigate to="/login" state={{ from: location }} replace />
     );
 };
 
