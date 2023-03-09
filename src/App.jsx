@@ -7,6 +7,7 @@ import Dashboard from './scenes/Dashboard/Dashboard';
 import ProtectedRoutes from './utils/ProtectedRoutes/ProtectedRoutes';
 import PersistLogin from './components/PersistLogin/PersistLogin';
 import './App.css';
+import AddProduct from './scenes/AddProduct/AddProduct';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route element={<PersistLogin />}>
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/add-product" element={<AddProduct />} />
             </Route>
           </Route>
         </Routes>

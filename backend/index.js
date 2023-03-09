@@ -1,5 +1,6 @@
 const express = require('express');
 const users = require('./users/users');
+const books = require('./books/books');
 const cookieParser = require('cookie-parser');
 const PORT = 3001;
 const app = express();
@@ -37,6 +38,22 @@ app.post('/api/authentication', async (req, res) => {
             res.cookie('jwt', response.refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
             // Send the accessToken and user role back to the front end as an HTTP 200 code
             res.status(200).json({ message: "Successfully signed in the user!", role: response.role, accessToken: response.accessToken });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+app.post('/api/products', async (req, res) => {
+    try {
+        // Call the createBook function from the books script
+        const response = await books.createBook(req.body);
+        // If no response return a 400 error as the book creation failed 
+        if(!response) {
+            res.status(400).json({ message: "Failed to add book to the database." });
+        } else {
+            // Send a 200 code on successful execution of the function
+            res.status(200).json({ message: "Successfully added the book to the database!" })
         }
     } catch (err) {
         console.log(err);
