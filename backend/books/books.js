@@ -17,13 +17,14 @@ const createBook = async (data) => {
             author: author,
             genre: genre,
             desc: desc,
-            price: price
+            price: price,
+            stripe_id: ''
         }
 
         const response = await database.createEntry('books', payload);
         if (response) {
             console.log("Successfully created a new book entry in database!");
-            return true;
+            return response;
         } else {
             console.log("Failed to create new book entry.");
             return false;
@@ -34,6 +35,39 @@ const createBook = async (data) => {
     }
 }
 
+const updateBook = async(book, data) => {
+    console.log("Updating book with new data...");
+    console.log(book, data);
+    const query = {
+        _id: book
+    }
+    try {
+        const updateResponse = await database.updateEntry('books', query, data, 'stripe_id');
+        if (updateResponse) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const getBooks = async () => {
+    const query = {}
+    const sort = { title: -1 };
+    const books = database.readEntryArray('books', query, sort);
+    if (books) {
+        console.log("Successfully retrieved books!");
+        return books;
+    } else {
+        console.log("Failed to retrieve books");
+        return false;
+    }
+}
+
 module.exports = {
-    createBook
+    createBook,
+    updateBook,
+    getBooks
 }
