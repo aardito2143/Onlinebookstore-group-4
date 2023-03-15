@@ -1,0 +1,14 @@
+.book-item-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: minmax(300px, 600px);
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 12px;
+    box-shadow: 10px 5px 5px rgba(0,0,0,0.4);
+    padding: 1em 2em;
+}
+
+h1, h2, p {
+    margin: 0;
+}

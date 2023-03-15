@@ -15,14 +15,16 @@ const connectToDatabase = async () => {
 
 const createEntry = async (table, payload) => {
     console.log("Attempting to create new entry in the database...");
+    let objectId = '';
     try {
         const conn = await connectToDatabase();
         const coll = await conn.collection(table);
 
         const response = await coll.insertOne(payload);
+        objectId = response.insertedId;
         if (response) {
             console.log("Successfully created new database entry!");
-            return true;
+            return response;
         } else {
             console.log("Failed to create new database entry.");
             return false;
@@ -53,6 +55,21 @@ const readEntry = async (table, query) => {
     }
 }
 
+const readEntryArray = async (table, query, sort) => {
+    try {
+        const conn = await connectToDatabase();
+        const coll = await conn.collection(table);
+        const queryResult = await coll.find(query).sort(sort).toArray();
+        if (queryResult){
+            return queryResult;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const updateEntry = async (table, query, payload, location="") => {
     console.log("Attempting to update entry in database...");
     try {
@@ -64,7 +81,7 @@ const updateEntry = async (table, query, payload, location="") => {
             console.log("No items found matching the provided query");
             return false;
         } else {
-            const response = await coll.updateOne(query, { $push: { [location]: payload } });
+            const response = await coll.updateOne(query, { $set: { [location]: payload } });
             if (response) {
                 console.log("Successfully updated the targeted entry with new data!");
                 return true;
@@ -109,6 +126,7 @@ const deleteEntry = async (table, query) => {
 module.exports = {
     createEntry,
     readEntry,
+    readEntryArray,
     updateEntry,
     deleteEntry
 }

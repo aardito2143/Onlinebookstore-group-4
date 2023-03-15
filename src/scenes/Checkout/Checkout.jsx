@@ -1,16 +1,14 @@
 import getStripe from "../../lib/getStripe";
-import Success from "./Success";
+import Success from "../Success/Success";
+import useAuth from "../../hooks/useAuth";
 
 export default function Checkout() {
+    const { cart } = useAuth();
+    console.log(cart);
     async function handleCheckout() {
         const stripe = await getStripe();
         const { error } = await stripe.redirectToCheckout({
-          lineItems: [
-            {
-              price: "price_1MiQhgBFILIPC5HySc0EDdTE",
-              quantity: 1,
-            },
-          ],
+          lineItems: cart,
           mode: 'payment',
           successUrl: `http://localhost:3000/success`,
           cancelUrl: `http://localhost:3000/cancel`,

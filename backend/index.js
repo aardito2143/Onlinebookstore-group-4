@@ -1,6 +1,7 @@
 const express = require('express');
 const users = require('./users/users');
 const books = require('./books/books');
+const stripe = require('./stripe/stripe');
 const cookieParser = require('cookie-parser');
 const PORT = 3001;
 const app = express();
@@ -52,8 +53,19 @@ app.post('/api/products', async (req, res) => {
         if(!response) {
             res.status(400).json({ message: "Failed to add book to the database." });
         } else {
-            // Send a 200 code on successful execution of the function
-            res.status(200).json({ message: "Successfully added the book to the database!" })
+            console.log(response)
+
+            const stripeResponse = await stripe.testCreateProduct(req.body, response.insertedId.toString());
+            if(!stripeResponse){
+                return res.status(400).json({ message: "Failed to add product to stripe" });
+            } else {
+                const updateResponse = await books.updateBook(response.insertedId, stripeResponse.productId);
+                if (updateResponse) {
+                    return res.status(200).json({ message: "Successfully added the book to the database!", productId: stripeResponse.productId })
+                } else {
+                    return res.status(400).json({ message: "Failed to add stripe price ID to database" });
+                }
+            }
         }
     } catch (err) {
         console.log(err);
@@ -75,6 +87,20 @@ app.get('/api/token/refresh', async (req, res) => {
     if (tokenResponse) {
         console.log('Sending access token back to front-end!');
         return res.status(200).json({ role: tokenResponse.role, accessToken: tokenResponse.accessToken });
+    }
+})
+
+app.get('/api/books', async (req, res) => {
+    console.log("Hit books endpoint for list of books!");
+    try {
+        const response = await books.getBooks();
+        if(!response) {
+            res.status(400).json({ message: 'No books found!' });
+        } else {
+            res.status(200).json({ message: "Successfully retrieved books!", data: response });
+        }
+    } catch (err) {
+        console.log(err);
     }
 })
 
