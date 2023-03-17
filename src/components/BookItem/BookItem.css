@@ -1,12 +1,115 @@
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
 .book-item-container {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: minmax(300px, 600px);
-    border: 1px solid rgba(0,0,0,0.4);
-    border-radius: 12px;
-    box-shadow: 10px 5px 5px rgba(0,0,0,0.4);
-    padding: 1em 2em;
+    align-items: center;
+    width: 200px;
+    height: minmax(300px, 385px);
+    border-radius: 0.5rem;
+    background: #f9ab55;
+    padding: .25em .25em;
+}
+
+.book-item-container::before,
+.book-item-container::after {
+    content: "";
+    position: absolute;
+    inset: -.5rem;
+    z-index: -1;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        #084887,
+        #909cc2,
+        #F58A07,
+        #909cc2,
+        #084887
+    );
+    border-radius: inherit;
+    animation: rotation 20s linear infinite;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+}
+
+.book-item-container::after {
+    filter: blur(3.5rem);
+}
+
+.book-cover-art {
+    background-color: black;
+    width: 164px;
+    height: 246px;
+}
+
+.book-details {
+    width: 100%;
+}
+
+.book-title {
+    overflow: hidden;
+    color: black;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.book-title:hover .tooltip {
+    visibility: visible;
+}
+
+.book-author {
+    color: black;
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+.book-price {
+    color: black;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 900;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: .5rem;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.book-add-to-cart {
+    width: 100%;
+    background-color: #084887;
+    border: 2px solid #084887;
+    color: #f7f5fb;
+    font-family: inherit;
+    border-radius: 4px;
+    padding: .25em .5em;
+    cursor: pointer;
+}
+
+.book-add-to-cart:hover {
+    border: 2px solid #f7f5fb;
+}
+
+@keyframes rotation {
+    0% { --gradient-angle: 0deg; }
+    100% { --gradient-angle: 360deg; }
 }
 
 h1, h2, p {

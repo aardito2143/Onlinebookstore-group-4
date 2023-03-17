@@ -3,6 +3,9 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const testCreateProduct = async (data, id) => {
     const { title, desc, price } = data;
+    console.log(price);
+    const modifiedPrice = Number(price.replace(/\./g, ""));
+    console.log(modifiedPrice);
     try {
         const product = await stripe.products.create({
             id: id,
@@ -12,7 +15,7 @@ const testCreateProduct = async (data, id) => {
 
         console.log(product)
 
-        const priceResponse = await setProductPrice(id, price);
+        const priceResponse = await setProductPrice(id, modifiedPrice);
         if (priceResponse) {
             return { productId: priceResponse.id };
         } else {
@@ -25,7 +28,7 @@ const testCreateProduct = async (data, id) => {
 
 const setProductPrice = async (id, price) => {
     const newPrice = await stripe.prices.create({
-        unit_amount_decimal: 199,
+        unit_amount_decimal: price,
         currency: 'usd',
         product: id
     });

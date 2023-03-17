@@ -2,6 +2,7 @@ const express = require('express');
 const users = require('./users/users');
 const books = require('./books/books');
 const stripe = require('./stripe/stripe');
+const cart = require('./cart/cart');
 const cookieParser = require('cookie-parser');
 const PORT = 3001;
 const app = express();
@@ -102,7 +103,40 @@ app.get('/api/books', async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-})
+});
+
+app.get('/api/cart', async (req, res) => {
+    console.log("Getting Cart items...");
+    const response = await cart.getCartItems();
+    if (response) {
+        return res.status(200).json(response);
+    } else {
+        return res.status(400).json({ message: 'Cart is empty' });
+    }
+});
+
+app.post('/api/cart', async (req, res) => {
+    console.log("Adding a new item to the cart...");
+    console.log(req.body['item']);
+    try {
+        const response = await cart.addItemToCart(req.body['item']);
+        if (!response) {
+            return res.status(400).json({ message: "Failed to add item to cart" });
+        } else {
+            res.status(200).json({ message: "Successfully added a new item to the cart!" });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+app.put('/api/cart', async (req, res) => {
+
+});
+
+app.delete('/api/cart', async (req, res) => {
+
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}...`);

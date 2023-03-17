@@ -1,15 +1,15 @@
+export default function SummaryItem(props) {
+    const imageName = props.replace(/[^A-Z0-9]/ig, "").toLowerCase();
 
-
-export default function SummaryItem() {
     return (
         <div className="summary-item">
             <div style={{ "display" : "flex", alignContent: 'center', justifyContent: 'flex-start' }} >
-                <img className="summary-thumbnail" src="/images/book_placeholder.png" />
-                <p style={{ alignSelf: 'center' }}>The Lord of the Rings</p>
+                <img className="summary-thumbnail" src={`/images/${imageName}.jpg`} />
+                <p style={{ alignSelf: 'center' }}>{props.title}</p>
             </div>
-            <p>$4.99</p>
-            <p>1</p>
-            <p>$4.99</p>
+            <p>{props.price}</p>
+            <p>{props.quantity}</p>
+            <p>{props.price * props.quantity}</p>
         </div>
     )
 }

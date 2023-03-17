@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import useCart from '../../hooks/useCart';
 import BookItem from '../../components/BookItem/BookItem';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';
 import "./Home.css";
 
 const Home = () => {
     const [books, setBooks] = useState([]);
+    const addToCart = useCart();
 
     useEffect(() => {
         const getBooks = async () => {
@@ -30,22 +31,25 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='books-container'>
-            {books && books.map(
-                (book) => 
-                    <BookItem 
-                        id={book._id} 
-                        title={book.title} 
-                        author={book.author} 
-                        genre={book.genre} 
-                        desc={book.desc} 
-                        price={book.price} 
-                        stripeId={book.stripe_id} 
-                    />
-                )
-            }
-            <Link to="/checkout">To the Checkout</Link>
-        </div>
+        <main className='main-content'>
+            <div className='books-container'>
+                {books && books.map(
+                    (book, index) => 
+                        <BookItem
+                            key={index}
+                            id={book._id} 
+                            title={book.title} 
+                            author={book.author} 
+                            genre={book.genre} 
+                            desc={book.desc} 
+                            price={book.price} 
+                            stripeId={book.stripe_id}
+                            addToCart={addToCart}
+                        />
+                    )
+                }
+            </div>
+        </main>
     )
 }
 

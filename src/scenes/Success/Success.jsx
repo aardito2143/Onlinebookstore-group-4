@@ -23,10 +23,7 @@ export default function Success() {
                         <p className="order-summary-header">Qty</p>
                         <p className="order-summary-header">Total</p>
                     </div>
-                    <SummaryItem />
-                    <SummaryItem />
-                    <SummaryItem />
-                    {/* {cart.length > 0 ? cart.map((item) => <SummaryItem />) : <p>Nothing Here...</p>} */}
+                    {cart.length > 0 ? cart.map((item) => <SummaryItem cart={item} />) : <p>Nothing Here...</p>}
                 </div>
                 <Link className="confirmation-policy-link" to="/policies">Read about our Refund Policy</Link>
             </div>
