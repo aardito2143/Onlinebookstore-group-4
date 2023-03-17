@@ -9,7 +9,7 @@ export default function () {
     
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [genre, setGenre] = useState('action');
+    const [genre, setGenre] = useState('mystery');
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
 
@@ -85,12 +85,7 @@ export default function () {
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
                     required>
-                        <option value="action">Action</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="fantasy">Fantasy</option>
-                        <option value="Sci-Fi">Sci-Fi</option>
-                        <option value="Thriller">Thriller</option>
-                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="action">Mystery</option>
                 </select>
             </div>
             <div className="form-input-field">

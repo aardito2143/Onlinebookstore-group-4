@@ -1,30 +1,36 @@
 import React from 'react'
 import "./BookItem.css";
-import useCart from '../../hooks/useCart';
 import { toast } from 'react-toastify';
 
-const BookItem = (props) => {
-    const cart = useCart();
+const BookItem = ({ title, author, genre, desc, price, id, stripeId, addToCart }) => {
 
-    const handleClick = () => {
-        cart({
-            price: props.stripeId,
-            quantity: 1
-        });
+    const imageName = title.replace(/[^A-Z0-9]/ig, "").toLowerCase();
 
-        toast.success(`Added ${props.title} to cart!`);
-    }
+    const book = {
+        title: title,
+        author: author,
+        genre: genre,
+        desc: desc,
+        cost: price,
+        id: id,
+        price: stripeId,
+        quantity: 1
+    };
 
     return (
         <div className='book-item-container'>
-            <h1>Title: {props.title}</h1>
-            <h2>Author: {props.author}</h2>
-            <p>Genre: {props.genre}</p>
-            <p>Description: {props.desc}</p>
-            <p>Price: {props.price}</p>
-            <p>Book Id: {props.id}</p>
-            <p>Stripe Product Code: {props.stripeId}</p>
-            <button onClick={handleClick}>Add to Cart</button>
+            <img className='book-cover-art' src={`/images/${imageName}.jpg`}/>
+            <div className='book-details'>
+                <h1 className='book-title'>
+                    {title}
+                    <span className='tooltip'>
+                        {title}
+                    </span>    
+                </h1>
+                <p className='book-author'>{author}</p>
+                <p className='book-price'>$ {price}</p>
+                <button className='book-add-to-cart' onClick={() => addToCart(book)}>Add to Cart</button>
+            </div>
         </div>
     )
 }

@@ -1,5 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-weight: 500;
+}
+html { overflow-y: scroll; }
+  .navHeader {
+    font-size: 35px;
+    text-align: center;
+    margin-top: -6px;
+    margin-bottom: 5px;
+    padding-top: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px #f58a07;
+    font-family: 'Fredoka One';
+    font-weight: normal;
+  }
+  
+  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+  
+  body {
+    background: #f7f5fb;
+    font-size: 22px;
+    line-height: 32px;
+    color: #ffffff;
+    word-wrap: break-word !important;
+    font-family: "Open Sans", sans-serif;
+  }
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .books-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+  gap: 40px;
+  margin-top: 40px;
 }
