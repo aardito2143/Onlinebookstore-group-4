@@ -48,7 +48,7 @@ export default function Login() {
             setEmail('');
             setPass('');
             setSuccess(`Successfully Signed in as: ${email} With a user role of: ${role}`)
-            // navigate(from, { replace: true });
+            navigate(from, { replace: true });
         } catch (err) {
             if(!err?.response) {
                 setErrMsg('Server Connection Timed Out');
@@ -106,9 +106,6 @@ export default function Login() {
                 </div>
                 <button type='submit' className='form-btn'>Sign-In</button>
             </form>
-            <div>
-                <Link to="/dashboard">Go to Admin Dashboard!</Link>
-            </div>
         </div>
     )
 };

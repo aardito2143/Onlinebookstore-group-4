@@ -10,15 +10,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    height: minmax(300px, 385px);
+    min-width: 200px;
+    min-height: 300px;
+    max-width: 300px;
+    max-height: 385px;
     border-radius: 0.5rem;
     background: #f9ab55;
     padding: .25em .25em;
+    margin: .5em .5em;
 }
 
 .book-item-container::before,
 .book-item-container::after {
+    display: inline-block;
     content: "";
     position: absolute;
     inset: -.5rem;
