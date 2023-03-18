@@ -43,7 +43,66 @@ const addItemToCart = async (data) => {
     }
 }
 
+const clearCart = async () => {
+    try {
+        const deleteResponse = await database.deleteAll('cart', {});
+        if (deleteResponse) {
+            return deleteResponse;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const updateQuantity = async (id, newQuantity) => {
+    try {
+        const updateResponse = await database.updateEntry('cart', { id: id }, 'set', Number(newQuantity), 'quantity');
+        if (updateResponse) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const incrementQuantity = async (id) => {
+    try {
+        const updateResponse = await database.updateEntry('cart', { id: id }, 'inc', 1);
+        if (updateResponse) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const deleteItem = async (id) => {
+    try {
+        const deleteResponse = await database.deleteEntry('cart', { id: id });
+        if (deleteResponse) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        return false;
+    }
+}
+
 module.exports = {
     addItemToCart,
-    getCartItems
+    getCartItems,
+    clearCart,
+    updateQuantity,
+    incrementQuantity,
+    deleteItem
 }

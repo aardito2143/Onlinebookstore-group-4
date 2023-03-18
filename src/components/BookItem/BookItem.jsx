@@ -1,6 +1,5 @@
 import React from 'react'
 import "./BookItem.css";
-import { toast } from 'react-toastify';
 
 const BookItem = ({ title, author, genre, desc, price, id, stripeId, addToCart }) => {
 

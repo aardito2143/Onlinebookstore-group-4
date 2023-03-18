@@ -85,7 +85,7 @@ export default function () {
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
                     required>
-                        <option value="action">Mystery</option>
+                        <option value="mystery">Mystery</option>
                 </select>
             </div>
             <div className="form-input-field">
