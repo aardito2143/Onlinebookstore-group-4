@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 import axios from "../../api/axios";
 import "./Navbar.css";
 import { toast } from "react-toastify";
@@ -8,6 +9,7 @@ import { toast } from "react-toastify";
 export default function Navbar () {
     const navigate = useNavigate();
     const { cart, setCart } = useAuth();
+    const { totalQuantity } = useCart();
 
     const handleClick = () => {
         navigate('/checkout');
@@ -57,7 +59,7 @@ export default function Navbar () {
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#084887" className="bi bi-bag" viewBox="0 0 16 16">
                             <path className="bi-bag" d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                         </svg>
-                        {cart && cart.length > 0 && <div className="cart-icon">{cart.length <= 9 ? cart.length : "9+"}</div>}
+                        {cart && totalQuantity > 0 && <div className="cart-icon">{totalQuantity <= 9 ? totalQuantity : "9+"}</div>}
                     </button>
                 </div>
                 <li className="search-icon">

@@ -130,13 +130,57 @@ app.post('/api/cart', async (req, res) => {
     }
 });
 
-app.put('/api/cart', async (req, res) => {
-
+app.put('/api/cart/:id', async (req, res) => {
+    console.log("Attempting to update cart database...");
+    console.log(req.body);
+    const id = req.params.id;
+    if (!req.body['set']) {
+        console.log("Not a set action, increment quantity by 1...");
+        const updateResponse = await cart.incrementQuantity(id);
+        if (updateResponse) {
+            return res.status(200).json({ message: "Successfully updated the quanity of cart item!" });
+        } else {
+            return res.status(400).json({ message: "Failed to update cart quantity" });
+        }
+    } else {
+        console.log("This is a set action, set the quantity to the provided number...");
+        const setUpdateResponse = await cart.updateQuantity(id, req.body['quantity']);
+        if (setUpdateResponse) {
+            return res.status(200).json({ message: "Successfully set item quantity to specified value" });
+        } else {
+            return res.status(400).json({ message: "Failed to update cart quantity" });
+        }
+    }
 });
 
 app.delete('/api/cart', async (req, res) => {
-
+    console.log("Clearing the cart...");
+    try {
+        const response = await cart.clearCart();
+        if (response) {
+            return res.status(200).json({ message: "Successfully cleared the cart!" });
+        } else {
+            return res.status(400).json({ message: "Failed to clear the cart" });
+        }
+    } catch (err) {
+        console.log(err);
+    }
 });
+
+app.delete('/api/cart/:id', async (req, res) => {
+    console.log("Attempting to remove an item from the cart...");
+    const id = req.params.id;
+    try {
+        const response = await cart.deleteItem(id);
+        if (response) {
+            return res.status(200).json({ message: "Successfully removed the item from the cart!" });
+        } else {
+            return res.status(400).json({ message: "Failed to remove item from cart" });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}...`);

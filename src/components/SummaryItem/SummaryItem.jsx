@@ -1,15 +1,14 @@
 export default function SummaryItem(props) {
-    const imageName = props.replace(/[^A-Z0-9]/ig, "").toLowerCase();
-
+    const imageName = props.cart.title.replace(/[^A-Z0-9]/ig, "").toLowerCase();
     return (
         <div className="summary-item">
             <div style={{ "display" : "flex", alignContent: 'center', justifyContent: 'flex-start' }} >
                 <img className="summary-thumbnail" src={`/images/${imageName}.jpg`} />
-                <p style={{ alignSelf: 'center' }}>{props.title}</p>
+                <p style={{ alignSelf: 'center' }}>{props.cart.title}</p>
             </div>
-            <p>{props.price}</p>
-            <p>{props.quantity}</p>
-            <p>{props.price * props.quantity}</p>
+            <p>$ {props.cart.cost}</p>
+            <p>{props.cart.quantity}</p>
+            <p>$ {Number(props.cart.cost) * Number(props.cart.quantity)}</p>
         </div>
     )
 }

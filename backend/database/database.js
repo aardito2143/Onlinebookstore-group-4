@@ -70,7 +70,7 @@ const readEntryArray = async (table, query, sort) => {
     }
 }
 
-const updateEntry = async (table, query, payload, location="") => {
+const updateEntry = async (table, query, action="set", payload, location="") => {
     console.log("Attempting to update entry in database...");
     try {
         const conn = await connectToDatabase();
@@ -81,14 +81,28 @@ const updateEntry = async (table, query, payload, location="") => {
             console.log("No items found matching the provided query");
             return false;
         } else {
-            const response = await coll.updateOne(query, { $set: { [location]: payload } });
-            if (response) {
-                console.log("Successfully updated the targeted entry with new data!");
+            try {
+                switch (action) {
+                    case "set":
+                        const setResponse = await coll.updateOne(query, { $set: { [location]: payload } });
+                        if (setResponse) {
+                            console.log("Successfully updated the targeted entry with new data");
+                            return true;
+                        }
+                        break;
+                    case "inc":
+                        const incResponse = await coll.updateOne(query, { $inc: { quantity: payload } });
+                        if (incResponse) {
+                            console.log("Successfully updated the quantity of the target entry");
+                            return true;
+                        }
+                        break;
+                }
                 return true;
-            } else {
-                console.log("Failed to update the specified table entry.");
+            } catch (err) {
+                console.log(err);
                 return false;
-            }
+            }  
         }
     } catch (err) {
         console.log(err);
@@ -123,10 +137,29 @@ const deleteEntry = async (table, query) => {
     }
 }
 
+const deleteAll = async (table, query={}) => {
+    console.log("Attempting to remove all entries from specified collection...");
+    try {
+        const conn = await connectToDatabase();
+        const coll = await conn.collection(table);
+
+        const deleteResponse = await coll.deleteMany(query);
+        if (deleteResponse) {
+            return deleteResponse
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
 module.exports = {
     createEntry,
     readEntry,
     readEntryArray,
     updateEntry,
-    deleteEntry
+    deleteEntry,
+    deleteAll
 }

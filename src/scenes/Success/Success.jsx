@@ -1,10 +1,35 @@
 import useAuth from "../../hooks/useAuth"
 import SummaryItem from "../../components/SummaryItem/SummaryItem";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "../../api/axios";
+import { toast } from "react-toastify";
 import "./Success.css";
 
 export default function Success() {
-    const { cart } = useAuth();
+    const { cart, setCart } = useAuth();
+    
+    useEffect(() => {
+        const getCart = async () => {
+            try {
+                const response = await axios('/api/cart');
+                console.log(response?.data);
+                setCart(response.data);
+                toast.success('Successfully retreived Cart!');
+                const deleteResponse = await axios.delete('/api/cart');
+                console.log(deleteResponse?.data);
+                toast.success('Successfully cleared cart from database!');
+            } catch (err) {
+                if(!err?.response) {
+                    toast.error('Server Connection Timed Out');
+                } else if (err?.response?.status === 400) {
+                    toast.error('Failed to fetch the cart');
+                }
+            }
+        }
+
+        getCart();
+    }, [])
 
     return (
         <div className="confirmation-page">

@@ -7,7 +7,7 @@ import "./Home.css";
 
 const Home = () => {
     const [books, setBooks] = useState([]);
-    const addToCart = useCart();
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const getBooks = async () => {

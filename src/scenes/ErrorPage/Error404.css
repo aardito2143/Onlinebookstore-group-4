@@ -5,7 +5,6 @@
   padding: 0;
   outline: none;
   box-sizing: border-box;
-  font-family: 'Fredoka One', sans-serif;
 }
 body{
   height: 100vh;
@@ -13,6 +12,7 @@ body{
   background-size: 400%;
 }
 #error-page{
+  font-family: 'Fredoka One', sans-serif;
   position: absolute;
   top: 10%;
   left: 15%;

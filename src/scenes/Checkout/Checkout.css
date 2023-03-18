@@ -1,0 +1,280 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html { overflow-y: scroll; }
+  .navHeader {
+    font-size: 35px;
+    text-align: center;
+    margin-top: -6px;
+    margin-bottom: 5px;
+    padding-top: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px #f58a07;
+    font-family: 'Fredoka One';
+    font-weight: normal;
+  }
+  nav {
+    height: 125px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #084887;
+    background: linear-gradient(to bottom right,#f7f5fb, #909cc2, #f9ab55, #f9ab55, #909cc2,#f7f5fb
+    );
+
+  }
+  
+  nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+
+    
+  }
+  
+  nav ul li {
+    display: inline-block;
+  }
+  
+  nav a {
+    display: block;
+    padding: 0 70px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 58px;
+    text-decoration: none;
+    border-radius: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition-duration: 0.4s;
+    font-weight: 500;
+    
+  }
+  
+  nav a:hover {
+    background-color: #909cc2;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px rgb(37, 11, 133);
+    color: #f9ab55;
+  }
+  
+  /* Hide Dropdowns by Default */
+  nav ul ul {
+    display: none;
+    position: absolute;
+    top: 55px; /* the height of the main nav */
+  }
+  
+  /* Display Dropdowns on Hover */
+  nav ul li:hover > ul {
+    display: inherit;
+  }
+  
+  /* First Tier Dropdown */
+  nav ul ul li {
+    width: 260px;
+    top: 7px;
+    padding-left: -60px;
+    margin-left: -12px;
+    float: center;
+    display: list-item;
+    position:relative;
+    background:#084887;
+    transition-duration: 0.4s;
+  }
+  
+  /* Second, Third and more Tiers */
+  nav ul ul ul li {
+    position: relative;
+    top: -60px;
+    left: 170px;
+  }
+  
+  /* Change this in order to change the Dropdown symbol */
+  li > a:after {
+    content: " ";
+  }
+  li > a:only-child:after {
+    content: "";
+  }
+  nav button[type=button]{
+    background-color: #f58a07;
+    border-color: #f58a07;
+    border-radius: 80px;
+    float: right;
+    padding: 0px;
+    margin-top: -40px;
+    margin-right: 23rem;
+    position: relative;
+    width: 5rem;
+    size: 3rem;
+    font-size: 10px;
+    font-weight: 700px;
+  }
+  nav input[type="text"] {
+    float: right;
+    padding: 8px;
+    border-style: round;
+    margin-top: -48px;
+    margin-right: 50px;
+    font-size: 17px;
+    position: relative;
+  }
+  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+
+body{
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background:#f7f5fb;;
+} 
+.container{
+  max-width: 800px;
+  background: #fff;
+  width: 800px;
+  padding: 25px 40px 10px 40px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  margin-left: 30rem;
+  margin-top: 6rem;
+  font-family: "Fredoka One";
+}
+.container .text{
+  text-align: center;
+  font-size: 38px;
+  font-weight: 600;
+  background: -webkit-linear-gradient(right, #f7f5fb, #909cc2, #f9ab55,#f7f5fb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.container form{
+  padding: 30px 0 0 0;
+}
+.container form .form-row{
+  display: flex;
+  margin: 32px 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+}
+form .form-row .input-data{
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+form .form-row .textarea{
+  height: 70px;
+}
+.input-data input,
+.textarea textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgba(248, 104, 7, 0.12);
+  
+}
+.input-data input:focus ~ label, .textarea textarea:focus ~ label,
+.input-data input:valid ~ label, .textarea textarea:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #084887;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.textarea textarea{
+  resize: none;
+  padding-top: 10px;
+}
+.input-data label{
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.textarea label{
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
+}
+.input-data .underline{
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before,
+.textarea textarea:focus ~ .underline:before,
+.textarea textarea:valid ~ .underline:before{
+  transform: scale(1);
+}
+.submit-btn .input-data{
+  overflow: hidden;
+  height: 45px!important;
+  width: 25%!important;
+}
+.submit-btn .input-data .inner{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right,#f7f5fb, #909cc2, #f9ab55, #084887, #909cc2,#f7f5fb);
+  transition: all 0.4s;
+}
+.submit-btn .input-data:hover .inner{
+  left: 0;
+}
+.submit-btn .input-data input{
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .container .text{
+    font-size: 30px;
+  }
+  .container form{
+    padding: 10px 0 0 0;
+  }
+  .container form .form-row{
+    display: block;
+  }
+  form .form-row .input-data{
+    margin: 35px 0!important;
+  }
+  .submit-btn .input-data{
+    width: 40%!important;
+  }
+}
