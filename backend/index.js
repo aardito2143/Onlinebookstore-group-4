@@ -37,7 +37,7 @@ app.post('/api/authentication', async (req, res) => {
             res.status(400).json({ message: "Provided Login credentials are incorrect or don't exist." });
         } else {
             // Send the refresh token back to the front-end as an http-only cookie. This is more secure than localStorage
-            res.cookie('jwt', response.refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            res.cookie('jwt', response.refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000, secure: true });
             // Send the accessToken and user role back to the front end as an HTTP 200 code
             res.status(200).json({ message: "Successfully signed in the user!", role: response.role, accessToken: response.accessToken });
         }

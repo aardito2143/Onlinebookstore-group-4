@@ -55,10 +55,8 @@ const Home = () => {
                 autoPlay={false}
                 keyBoardControl={true}
                 transitionDuration={500}
-                containerClass="carousel-container"
                 removeArrowOnDeviceType={['tablet', 'mobile']}
-                dotListClass="custom-dot-list-style"
-                itemClass='carousel-items'>
+                dotListClass="custom-dot-list-style">
                     {books && books.filter((book) => book.category === 'best seller')
                         .map((book, index) => 
                             <BookItem

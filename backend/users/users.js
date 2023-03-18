@@ -1,25 +1,26 @@
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const database = require('../database/database');
 
 // Create a hash of the user's password to store
 const createPasswordHash = async(password) => {
-    // Gerate salt for the password
-    const salt = crypto.randomBytes(16).toString('hex');
-    // Hash the password with the salt
-    const hash = crypto.createHmac('sha256', salt)
-                        .update(password)
-                        .digest('hex')
-    // Return the salt and the hashed password for storage
-    return { salt: salt, hash: hash };
+    const saltRounds = 10;
+    
+    const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(password, saltRounds, function(err, hash) {
+            if (err) reject(err);
+            resolve(hash);
+        });
+    });
+
+    console.log(`User password Hash: ${hashedPassword}`);
+    return hashedPassword;
 }
 
-const verifyHash = async (salt, pass) => {
-    const hash = crypto.createHmac('sha256', salt)
-                        .update(pass)
-                        .digest('hex');
+const verifyHash = async (userHash, pass) => {
+    const match = await bcrypt.compare(pass, userHash);
 
-    return hash;
+    return match;
 }
 
 const createUser = async (email, password) => {
@@ -30,9 +31,9 @@ const createUser = async (email, password) => {
         // Create a payload to send to the database containing user data
         const payload = {
             email: email,
-            salt: userHash.salt,
-            hash: userHash.hash,
-            role: 'user'
+            hash: userHash,
+            role: 'user',
+            refresh_token: ''
         };
         // Make call to database to insert a new document containing user details
         const response = await database.createEntry('users', payload);
@@ -63,9 +64,9 @@ const signInUser = async (email, pass) => {
             return false;
         } else {
             // Verify the provided password hashed with the user's salt matches the hash stored in the database
-            const userHash = await verifyHash(user.salt, pass);
+            const userHash = await verifyHash(user.hash, pass);
             // If the hashes don't match the wrong password was entered
-            if (userHash !== user.hash) {
+            if (!userHash) {
                 console.log("Entered password is incorrect.");
                 return false;
             } else {
@@ -99,9 +100,15 @@ const signInUser = async (email, pass) => {
                         expiresIn: '30d'
                     }
                 )
-                console.log("Successfully signed-in user and created their JSONWebTokens!");
-                // Return both tokens and the User's role to the main API file
-                return { message: "Login Successful", role: user.role, accessToken: accessToken, refreshToken: refreshToken };
+                const tokenResponse = await database.updateEntry('users', query, 'set', refreshToken, 'refresh_token');
+                if (tokenResponse) {
+                    console.log('Successfully added refresh token to the database!');
+                    console.log('Successfully signed in User!');
+                    return { message: "Login Successful", role: user.role, accessToken: accessToken, refreshToken: refreshToken };
+                } else {
+                    console.log('Failed to add refresh token to database.');
+                    return false;
+                }
             }
         }
     } catch (err) {

@@ -26,14 +26,14 @@ export default function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route element={<NavLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path='/checkout' element={<Checkout />} />
-          </Route>
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/success' element={<Success />} />
           <Route element={<PersistLogin />}>
+            <Route element={<NavLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path='/checkout' element={<Checkout />} />
+            </Route>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/success' element={<Success />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/dashboard/add-product" element={<AddProduct />} />

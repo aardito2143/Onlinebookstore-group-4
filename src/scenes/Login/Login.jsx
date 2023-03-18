@@ -6,7 +6,7 @@ import axios from '../../api/axios';
 const LOGIN_URL = "/api/authentication";
 
 export default function Login() {
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,6 +45,7 @@ export default function Login() {
             const accessToken = response?.data?.accessToken;
             const role = response?.data?.role;
             setAuth({ email, pass, role, accessToken });
+            console.log(auth);
             setEmail('');
             setPass('');
             setSuccess(`Successfully Signed in as: ${email} With a user role of: ${role}`)
