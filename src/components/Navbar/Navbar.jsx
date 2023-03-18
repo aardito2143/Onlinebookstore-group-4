@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 
 export default function Navbar () {
     const navigate = useNavigate();
-    const { cart, setCart } = useAuth();
+    const { auth, cart, setCart } = useAuth();
     const { totalQuantity } = useCart();
+
+    console.log(auth);
 
     const handleClick = () => {
         navigate('/checkout');
@@ -53,6 +55,11 @@ export default function Navbar () {
                     </li>
                     <li><Link to="/contact-us">Contact Us</Link></li>
                     <li><Link to="/about">About</Link></li>
+                    <li><Link to="/dashboard">Admin</Link>
+                        <ul style={{ zIndex: 2 }}>
+                            <li><Link to="/dashboard" >Dashboard</Link></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div className="Cart">
                     <button type="button" onClick={handleClick}>
