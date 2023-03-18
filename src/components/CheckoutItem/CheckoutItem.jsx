@@ -1,8 +1,8 @@
 import "./CheckoutItem.css";
 
 export default function CheckoutItem (props) {
-    console.log(props.cart);
     const imageName = props.cart.title.replace(/[^A-Z0-9]/ig, "").toLowerCase();
+    const maxQuantity = 9;
     return (
         <tr className="productitm">
             <td>
@@ -18,15 +18,11 @@ export default function CheckoutItem (props) {
                     defaultValue={props.cart.quantity}
                     onChange={(e) => props.updateQuantity(props.cart.id, Number(e.target.value))}
                     required>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                        <option value={6}>6</option>
-                        <option value={7}>7</option>
-                        <option value={8}>8</option>
-                        <option value={9}>9</option>
+                        {Array.from({ length: maxQuantity }, (_, index) => (
+                            <option key={index} value={index + 1}>
+                                {index + 1 }
+                            </option>
+                        ))}
                 </select>
             </td>
             <td>{props.cart.title}</td>

@@ -39,14 +39,25 @@ html { overflow-y: scroll; }
     font-family: "Open Sans", sans-serif;
   }
 
+:root {
+  --slider-padding: 5rem;
+}
+
 .main-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
-.books-container {
-  display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
-  gap: 40px;
+.category-title {
+  font-size: 2rem;
   margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  padding-bottom: 1em;
+}
+
+.carousel-items {
+  max-width: 200px;
 }

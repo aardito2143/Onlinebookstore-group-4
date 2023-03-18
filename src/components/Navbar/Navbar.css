@@ -110,15 +110,16 @@ nav {
   }
 
 .cart-icon {
-    position: absolute;
-    right: 20px;
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid red;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    cursor: pointer;
+  font-family: 'Fredoka One', sans-serif;
+  position: absolute;
+  right: 20px;
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid red;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
 }

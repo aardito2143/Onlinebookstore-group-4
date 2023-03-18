@@ -10,6 +10,7 @@ export default function () {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [genre, setGenre] = useState('mystery');
+    const [category, setCategory] = useState('best seller');
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
 
@@ -87,6 +88,21 @@ export default function () {
                     required>
                         <option value="mystery">Mystery</option>
                 </select>
+            </div>
+            <div className="form-input-field">
+                <label htmlFor="category">
+                    Book Category
+                </label>
+                <select
+                    className="form-select-field"
+                    id="category"
+                    name="category"
+                    defaultValue={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    required>
+                        <option value="best seller">Best Seller</option>
+                        <option value="classics">Classics</option>
+                    </select>
             </div>
             <div className="form-input-field">
                 <label htmlFor="description">
