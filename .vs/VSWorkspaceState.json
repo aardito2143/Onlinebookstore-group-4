@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\PersistLogin",
+    "\\src\\context",
+    "\\src\\hooks",
+    "\\src\\lib",
+    "\\src\\scenes",
+    "\\src\\scenes\\Dashboard"
+  ],
+  "SelectedNode": "\\src",
+  "PreviewInSolutionExplorer": false
+}
