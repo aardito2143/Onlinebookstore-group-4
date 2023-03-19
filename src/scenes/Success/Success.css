@@ -104,7 +104,13 @@
 }
 
 .confirmation-policy-link {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: black;
     font-weight: 700;
+}
+
+.confirmation-return-home, .confirmation-return-home:visited {
+    color: black;
+    font-size: 1rem;
+    margin-bottom: 10px;
 }

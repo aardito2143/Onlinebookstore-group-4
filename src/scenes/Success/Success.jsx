@@ -51,6 +51,7 @@ export default function Success() {
                     {cart.length > 0 ? cart.map((item) => <SummaryItem cart={item} />) : <p>Nothing Here...</p>}
                 </div>
                 <Link className="confirmation-policy-link" to="/policies">Read about our Refund Policy</Link>
+                <Link className="confirmation-return-home" to="/">Return Home</Link>
             </div>
         </div>
     )

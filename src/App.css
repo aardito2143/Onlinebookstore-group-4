@@ -12,3 +12,7 @@ html, body {
 html, body, #root, .App {
   height: 100%;
 }
+
+body {
+  background-color: repeating-linear-gradient(45deg, #f7f5fb, #909cc2, #084887, #f58a07, #f9ab55);
+}
