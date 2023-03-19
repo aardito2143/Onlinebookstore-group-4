@@ -21,7 +21,7 @@ export default function () {
 
         try {
             const response = await axiosPrivate.post(BOOKS_URL,
-                JSON.stringify({ title, author, genre, desc, price }));
+                JSON.stringify({ title, author, genre, desc, price, category }));
             
             console.log(JSON.stringify(response?.data));
             toast.success('Successfully Created a New Product!');
