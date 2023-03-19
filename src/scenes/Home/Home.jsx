@@ -71,6 +71,7 @@ const Home = () => {
                                 price={book.price} 
                                 stripeId={book.stripe_id}
                                 addToCart={addToCart}
+                                qty={book.avail_inventory}
                             />
                         )
                     }

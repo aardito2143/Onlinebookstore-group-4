@@ -53,6 +53,22 @@ const updateBook = async(book, data) => {
     }
 }
 
+const updateBookInventory = async (book, qty) => {
+    console.log("Updating inventory of book...");
+    console.log(book);
+    const query = {
+        title: book
+    }
+
+    try {
+        const updateResponse = await database.updateEntry('books', query, 'inc', qty * -1, 'avail_inventory');
+        return updateResponse;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
 const getBooks = async () => {
     const query = {}
     const sort = { title: -1 };
@@ -69,5 +85,6 @@ const getBooks = async () => {
 module.exports = {
     createBook,
     updateBook,
+    updateBookInventory,
     getBooks
 }

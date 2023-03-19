@@ -91,7 +91,12 @@ const updateEntry = async (table, query, action="set", payload, location="") => 
                         }
                         break;
                     case "inc":
-                        const incResponse = await coll.updateOne(query, { $inc: { quantity: payload } });
+                        const incQuery = {};
+                        incQuery[location] = payload;
+                        const incResponse = await coll.updateOne(
+                            query, 
+                            { $inc: incQuery }
+                        );
                         if (incResponse) {
                             console.log("Successfully updated the quantity of the target entry");
                             return true;
