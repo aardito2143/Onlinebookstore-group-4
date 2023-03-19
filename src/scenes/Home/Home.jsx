@@ -55,8 +55,10 @@ const Home = () => {
                 autoPlay={false}
                 keyBoardControl={true}
                 transitionDuration={500}
+                containerClass="carousel-container"
                 removeArrowOnDeviceType={['tablet', 'mobile']}
-                dotListClass="custom-dot-list-style">
+                dotListClass="custom-dot-list-style"
+                itemClass='carousel-items'>
                     {books && books.filter((book) => book.category === 'best seller')
                         .map((book, index) => 
                             <BookItem
@@ -69,6 +71,7 @@ const Home = () => {
                                 price={book.price} 
                                 stripeId={book.stripe_id}
                                 addToCart={addToCart}
+                                qty={book.avail_inventory}
                             />
                         )
                     }

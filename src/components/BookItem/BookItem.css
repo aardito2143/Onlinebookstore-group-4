@@ -83,6 +83,15 @@
     font-weight: 900;
 }
 
+.book-qty {
+    margin: 0;
+    color: black;
+    font-family: inherit;
+    font-size: .625rem;
+    font-weight: 400;
+    line-height: 12px;
+}
+
 .tooltip {
     visibility: hidden;
     width: 120px;
@@ -109,6 +118,13 @@
 
 .book-add-to-cart:hover {
     border: 2px solid #f7f5fb;
+}
+
+.book-add-to-cart:disabled {
+    background-color: #818181;
+    border: 2px solid #717171;
+    color: #515151;
+    cursor: not-allowed;
 }
 
 @keyframes rotation {

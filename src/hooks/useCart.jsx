@@ -7,6 +7,10 @@ const useCart = () => {
 
     const addToCart = async (item) => {
         const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+        if (existingItem && existingItem.quantity >= item.avail_inventory){
+            toast.error("Couldn't Add Item to Cart: Exceeds Available Stock")
+            return;
+        }
 
         if (existingItem) {
             const updateResponse = await axios.put(`/api/cart/${existingItem.id}`,
@@ -56,6 +60,16 @@ const useCart = () => {
     };
 
     const updateCartItemQuantity = async (id, newQuantity) => {
+        const existingItem = cart.find((cartItem) => cartItem.id === id);
+        if (newQuantity === existingItem.quantity){
+            return existingItem.quantity;
+        }
+        
+        if (newQuantity > existingItem.avail_inventory){
+            toast.error("Couldn't Update Item Quantity: Exceeds Available Stock");
+            return existingItem.quantity;
+        }
+
         setCart(prevCart => {
             const updatedCart = [...prevCart];
             const cartItem = updatedCart.find(cartItem => cartItem.id === id);
@@ -78,7 +92,7 @@ const useCart = () => {
                 toast.error('Failed to update quantity of the item');
             }
         }
-        
+        return newQuantity;
     }
 
     const totalQuantity = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);

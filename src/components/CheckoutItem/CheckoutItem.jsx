@@ -1,8 +1,10 @@
+import { useState } from "react";
 import "./CheckoutItem.css";
 
 export default function CheckoutItem (props) {
     const imageName = props.cart.title.replace(/[^A-Z0-9]/ig, "").toLowerCase();
     const maxQuantity = 9;
+    const [qty, setQty] = useState();
     return (
         <tr className="productitm">
             <td>
@@ -16,7 +18,13 @@ export default function CheckoutItem (props) {
                     id="checkout-select-field"
                     name="checkout-selectfield"
                     defaultValue={props.cart.quantity}
-                    onChange={(e) => props.updateQuantity(props.cart.id, Number(e.target.value))}
+                    value={qty}
+                    onChange={(e) => 
+                        props.updateQuantity(props.cart.id, Number(e.target.value)).then(
+                            (updatedQty) => {
+                                setQty(updatedQty);
+                            }
+                        )}
                     required>
                         {Array.from({ length: maxQuantity }, (_, index) => (
                             <option key={index} value={index + 1}>

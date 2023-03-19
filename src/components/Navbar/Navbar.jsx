@@ -43,8 +43,14 @@ export default function Navbar () {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/account">Account</Link>
                         <ul className="">
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/register">Sign Up</Link></li>
+                            {auth && auth?.accessToken ? (
+                                <li><Link to="/logout">Logout</Link></li>
+                            ) : (
+                                <div>
+                                    <li><Link to="/login">Login</Link></li>
+                                    <li><Link to="/register">Sign Up</Link></li>
+                                </div>
+                            )}
                         </ul>
                     </li>
                     <li><Link to="/books">Books</Link>
