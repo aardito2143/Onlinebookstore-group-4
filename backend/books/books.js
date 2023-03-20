@@ -4,7 +4,8 @@ const createBook = async (data) => {
     const { 
         title, 
         author, 
-        genre, 
+        genre,
+        category,
         desc, 
         price 
     } = data;
@@ -18,7 +19,9 @@ const createBook = async (data) => {
             genre: genre,
             desc: desc,
             price: price,
-            stripe_id: ''
+            stripe_id: '',
+            category: category,
+            avail_inventory: 5
         }
 
         const response = await database.createEntry('books', payload);
@@ -42,7 +45,7 @@ const updateBook = async(book, data) => {
         _id: book
     }
     try {
-        const updateResponse = await database.updateEntry('books', query, data, 'stripe_id');
+        const updateResponse = await database.updateEntry('books', query, 'set', data, 'stripe_id');
         if (updateResponse) {
             return true;
         } else {

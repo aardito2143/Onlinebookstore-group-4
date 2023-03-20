@@ -12,6 +12,8 @@ import AddProduct from './scenes/AddProduct/AddProduct';
 import Home from './scenes/Home/Home';
 import ErrorPage from './scenes/ErrorPage/ErrorPage';
 import Navbar from './components/Navbar/Navbar';
+import About from './scenes/About/About';
+import Contact from './scenes/Contact/Contact';
 
 export default function App() {
 
@@ -30,6 +32,8 @@ export default function App() {
             <Route element={<NavLayout />}>
               <Route path="/" element={<Home />} />
               <Route path='/checkout' element={<Checkout />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/contact-us' element={<Contact />} />
             </Route>
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

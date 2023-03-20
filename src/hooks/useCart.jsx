@@ -98,8 +98,7 @@ const useCart = () => {
     const totalQuantity = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
     const totalCost = cart.reduce((total, cartItem) => total + (Number(cartItem.cost) * cartItem.quantity), 0);
-
-    console.log(cart);
+    
     return { 
         addToCart,
         removeCartItem,

@@ -1,0 +1,58 @@
+.carousel-container {
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel-slider {
+    flex-grow: 1;
+    display: flex;
+    width: calc(100% - 2 * var(--slider-padding));
+    transition: transform 500ms ease-in-out;
+  }
+  
+  .book-item {
+    flex: 0 0 20%;
+    max-width: 20%;
+    padding: 1rem;
+  }
+  
+  .handle {
+    border: none;
+    cursor: pointer;
+    flex-grow: 0;
+    width: 40px;
+    background-color: rgba(0,0,0,.3);
+    z-index: 2;
+    margin: 1rem 0;
+    transition: background-color 150ms ease-in-out;
+  }
+  
+  .handle-arrow {
+    transition: transform 150ms ease-in-out;
+  }
+  
+  .handle .handle-arrow {
+    visibility: hidden;
+  }
+  
+  .carousel-container:hover .handle-arrow {
+    visibility: visible;
+  }
+  
+  .handle:hover {
+    background-color: rgba(0,0,0,.6);
+  }
+  
+  .handle:hover .handle-arrow {
+    transform: scale(1.1);
+  }
+  
+  .right-handle {
+    border-radius: .5rem 0 0 .5rem;
+  }
+  
+  .left-handle {
+    border-radius: 0 .5rem .5rem 0;
+  }
