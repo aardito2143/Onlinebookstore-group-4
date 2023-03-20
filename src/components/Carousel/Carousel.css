@@ -1,3 +1,7 @@
+.carousel-wrapper {
+  padding-bottom: 20px;
+}
+
 .carousel-container {
     box-sizing: border-box;
     overflow: hidden;
@@ -55,4 +59,31 @@
   
   .left-handle {
     border-radius: 0 .5rem .5rem 0;
+  }
+
+  .carousel-position-markers {
+    visibility: hidden;
+    padding-top: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .carousel-position-marker {
+    height: 8px;
+    width: 25px;
+    background-color: rgba(0,0,0,.4);
+    transition: transform 250ms ease-in-out;
+    transition: background-color 250ms ease-in-out;
+  }
+
+  .active {
+    background-color: rgba(0,0,0,.8);
+    transform: scale(1.1);
+  }
+
+  .carousel-wrapper:hover .carousel-position-markers {
+    visibility: visible;
   }

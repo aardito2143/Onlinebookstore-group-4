@@ -55,8 +55,8 @@ export default function Navbar () {
                     </li>
                     <li><Link to="/books">Books</Link>
                         <ul>
-                            <li><Link to="/books/best-sellers">Best Sellers</Link></li>
-                            <li><Link to="/books/genres">Genres</Link></li>
+                            <li><a href="#best-sellers">Best Sellers</a></li>
+                            <li><a href="#classics">Classics</a></li>
                         </ul>
                     </li>
                     <li><Link to="/contact-us">Contact Us</Link></li>
