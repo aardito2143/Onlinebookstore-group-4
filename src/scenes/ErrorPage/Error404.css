@@ -7,7 +7,6 @@
   box-sizing: border-box;
 }
 body{
-  height: 100vh;
   background: linear-gradient(to bottom right, #f7f5fb, #909cc2, #f9ab55, #f9ab55, #909cc2,#f7f5fb);
   background-size: 400%;
 }

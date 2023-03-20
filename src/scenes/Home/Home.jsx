@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import useCart from '../../hooks/useCart';
+import useAuth from '../../hooks/useAuth';
 import BookItem from '../../components/BookItem/BookItem';
+import CartSidebar from '../../components/CartSidebar/CartSidebar';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';
 import Carousel from '../../components/Carousel/Carousel';
@@ -8,7 +10,8 @@ import "./Home.css";
 
 const Home = () => {
     const [books, setBooks] = useState([]);
-    const { addToCart } = useCart();
+    const { addToCart, updateCartItemQuantity, removeCartItem, totalCost } = useCart();
+    const { cart } = useAuth();
 
     useEffect(() => {
         const getBooks = async () => {
@@ -33,7 +36,15 @@ const Home = () => {
 
     return (
         <main className='main-content'>
-            <div className='category-title'>Best Sellers</div>
+            {cart.length > 0 && 
+                <CartSidebar 
+                    cart={cart}
+                    updateQuantity={updateCartItemQuantity}
+                    removeItem={removeCartItem}
+                    totalCost={totalCost}
+                />
+            }
+            <div id="best-sellers" className='category-title'>Best Sellers</div>
             <Carousel maxIndex={1} sliderName="best-sellers">
                 {books && books.filter((book) => book.category === 'best seller')
                         .map((book, index) => 
@@ -52,7 +63,7 @@ const Home = () => {
                         )
                 }
             </Carousel>
-            <div className='category-title'>Classics</div>
+            <div id="classics" className='category-title'>Classics</div>
             <Carousel maxIndex={1} sliderName="classics">
                 {books && books.filter((book) => book.category === 'classics')
                     .map((book, index) => 
