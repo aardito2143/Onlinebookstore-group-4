@@ -4,9 +4,9 @@
 Full Stack online bookstore for purchasing mystery themed novels.
 
 ## Meet the Team
-[Adam Ardito](https://github.com/aardito2143) - Project Manager | API Integrations
+[TaeAjah Cannon-Barnes](https://github.com/TaeLynne) - Project Manager | UI/UX Designer
 
-[TaeAjah Cannon-Barnes](https://github.com/TaeLynne) - Scrum Master | UI/UX Designer
+[Adam Ardito](https://github.com/aardito2143) - Scrum Master | API Integrations
 
 [Taylor Lee](https://github.com/TaylorLee23) - Developer | React Components
 
