@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Mystery Inc. Bookstore | Senior Project (CTU)
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" /> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" /> <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" /> <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" /> <img src="https://camo.githubusercontent.com/5e8e465612d10ddb4831b853b21cf9763eeb9f004b73f0fb7420ba8df14951c3/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f7374796c653d666f722d7468652d6261646765266d6573736167653d53747269706526636f6c6f723d303038434444266c6f676f3d537472697065266c6f676f436f6c6f723d464646464646266c6162656c3d" />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Full Stack online bookstore for purchasing mystery themed novels.
 
-## Available Scripts
+## Meet the Team
+[Adam Ardito](https://github.com/aardito2143) - Project Manager | API Integrations
 
-In the project directory, you can run:
+[TaeAjah Cannon-Barnes](https://github.com/TaeLynne) - Scrum Master | UI/UX Designer
 
-### `npm start`
+[Taylor Lee](https://github.com/TaylorLee23) - Developer | React Components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[Daniel Bevan](https://github.com/Dbevan770) - Developer | Backend Infrastructure | React Components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+* Login / Register an Account (Authenticated using JSON Web Tokens)
+* Books catalog stored in MongoDB Atlas Cloud Database
+* Shopping Cart (built from scratch)
+* Search functionality
+* Stripe payment integration
 
-### `npm test`
+## Screenshots & GIFs
+<img src="https://drive.google.com/uc?export=view&id=13tg_AwGSOal7LWdKp2-yCdCv8hAa7_aw" />*Homepage with carousel items and toast notifcations*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<img src="https://drive.google.com/uc?export=view&id=1BpVznh_9Z5JPb270BXNVRoP6iatkJGtl" />*Stripe payment integration*
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://drive.google.com/uc?export=view&id=11lI09QHTWTFrKTD_wWXMQuPwsv90JC_7" />*Order confirmation and summary*
