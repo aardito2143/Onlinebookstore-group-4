@@ -1,5 +1,6 @@
 import React from 'react'
 import "./BookItem.css";
+import ImgPlaceholder from '../ImgPlaceholder/ImgPlaceholder';
 
 const BookItem = ({ title, author, genre, desc, price, qty, id, stripeId, category, addToCart }) => {
 
@@ -21,7 +22,8 @@ const BookItem = ({ title, author, genre, desc, price, qty, id, stripeId, catego
     return (
         <div className='book-item'>
             <div className='book-item-container'>
-                <img className='book-cover-art' src={`/images/${imageName}.jpg`}/>
+                <ImgPlaceholder name='book-cover-art' src={`/images/${imageName}.jpg`} width='164px' height='246px' />
+                {/* <img className='book-cover-art' src={`/images/${imageName}.jpg`}/> */}
                 <div className='book-details'>
                     <h1 className='book-title'>
                         {title}

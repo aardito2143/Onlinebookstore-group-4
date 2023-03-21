@@ -14,6 +14,8 @@ import ErrorPage from './scenes/ErrorPage/ErrorPage';
 import Navbar from './components/Navbar/Navbar';
 import About from './scenes/About/About';
 import Contact from './scenes/Contact/Contact';
+import Books from './scenes/Books/Books';
+import CartSidebar from './components/CartSidebar/CartSidebar';
 
 export default function App() {
 
@@ -24,16 +26,30 @@ export default function App() {
     </>)
   }
 
+  const CartSidebarLayout = () => {
+    return (
+      <>
+        <CartSidebar />
+        <Outlet />
+      </>
+    )
+  }
+
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route element={<PersistLogin />}>
             <Route element={<NavLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path='/checkout' element={<Checkout />} />
+              <Route element={<CartSidebarLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path='/books/:category'>
+                  <Route index element={<Books />} />
+                </Route>
+              </Route>
               <Route path='/about' element={<About />} />
               <Route path='/contact-us' element={<Contact />} />
+              <Route path='/checkout' element={<Checkout />} />
             </Route>
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

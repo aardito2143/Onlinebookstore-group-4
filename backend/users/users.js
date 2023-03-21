@@ -4,25 +4,40 @@ const database = require('../database/database');
 
 // Create a hash of the user's password to store
 const createPasswordHash = async(password) => {
+    // saltRounds is how many times the password is salted
+    // diminishing returns on increasing it from 10
     const saltRounds = 10;
     
+    // Create a hashed password using the bcrypt library
+    // This is not usually an async function but I don't want
+    // it to run syncronously so we use a Promise to wrap the
+    // function instead
     const hashedPassword = await new Promise((resolve, reject) => {
         bcrypt.hash(password, saltRounds, function(err, hash) {
+            // if the function fails reject the promise
             if (err) reject(err);
+
+            // if successful resolve the promise
             resolve(hash);
         });
     });
 
+    // Return the hashed password, logging it to the console isn't
+    // the best practice but it help with debugging in a dev environment
     console.log(`User password Hash: ${hashedPassword}`);
     return hashedPassword;
 }
 
+// This checks if the hash of the password the user entered into the
+// login field matches the hash we have stored in the database for that
+// user
 const verifyHash = async (userHash, pass) => {
     const match = await bcrypt.compare(pass, userHash);
 
     return match;
 }
 
+// Function for creating the user
 const createUser = async (email, password) => {
     try {
         console.log("Attempting to add new User to the database...");
@@ -37,6 +52,19 @@ const createUser = async (email, password) => {
         };
         // Make call to database to insert a new document containing user details
         const response = await database.createEntry('users', payload);
+
+        // This checks the result of response up above. Before I would return
+        // false if there were errors. We return true here if the database call
+        // returned true as well.
+        /*
+            This can also be simplified as:
+
+            `return response;`
+            
+            As `if (condition) return true;` is basically the same thing just more
+            verbose. However, that doesn't allow you to log any messages and in
+            my opinion is harder to read.
+        */
         if (response) {
             console.log("Successfully created new user entry in database!");
             return true;
@@ -50,6 +78,8 @@ const createUser = async (email, password) => {
     }
 }
 
+
+// This is the sign in function. Here is where the user gets authenticated
 const signInUser = async (email, pass) => {
     try {
         // Create a query to search for the provided email in the database
@@ -100,6 +130,12 @@ const signInUser = async (email, pass) => {
                         expiresIn: '30d'
                     }
                 )
+
+                // Now we update the user in the database to store their refresh token.
+                // This isn't the most ideal implementation as signing in on another PC invalidates your
+                // refresh token and makes you sign in again. Usually you also wouldn't make your
+                // own sign in method as it's better to just use a library and let them manage the
+                // security of tokens
                 const tokenResponse = await database.updateEntry('users', query, 'set', refreshToken, 'refresh_token');
                 if (tokenResponse) {
                     console.log('Successfully added refresh token to the database!');

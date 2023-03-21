@@ -13,9 +13,13 @@ const useCart = () => {
         }
 
         if (existingItem) {
-            const updateResponse = await axios.put(`/api/cart/${existingItem.id}`,
-                    { set: false });
-            console.log(updateResponse?.data);
+            // eslint-disable-next-line
+            const updateResponse = await toast.promise(axios.put(`/api/cart/${existingItem.id}`,
+                    { set: false }), {
+                        pending: 'Adding item to cart...',
+                        success: `Successfully added ${item.title} to cart!`,
+                        error: 'Something went wrong'
+                    });
             const updatedCart = cart.map((cartItem) => {
                 if (cartItem.id === existingItem.id) {
                     return { ...cartItem, quantity: cartItem.quantity + 1 };
@@ -23,13 +27,14 @@ const useCart = () => {
                 return cartItem
             });
             setCart(updatedCart);
-            toast.success(`Successfully added ${item.title} to cart!`);
         } else {
             try {
-                console.log(item);
-                const response = await axios.post('/api/cart', { item });
-                console.log(response?.data);
-                toast.success(`Successfully added ${item.title} to cart!`);
+                // eslint-disable-next-line
+                const response = await toast.promise(axios.post('/api/cart', { item }), {
+                    pending: 'Adding item to cart...',
+                    success: `Successfully added ${item.title} to cart!`,
+                    error: 'Something went wrong'
+                });
                 setCart([...cart, { ...item, quantity: 1 }]);
             } catch (err) {
                 if (!err?.response) {
@@ -44,19 +49,23 @@ const useCart = () => {
     }
 
     const removeCartItem = async (id) => {
-        setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== id));
-
         try {
-            const deleteResponse = await axios.delete(`/api/cart/${id}`);
+            const deleteResponse = await toast.promise(axios.delete(`/api/cart/${id}`), {
+                pending: 'Removing item(s) from cart',
+                success: 'Successfully removed item(s) from cart!',
+                error: 'Something went wrong.'
+            });
             console.log(deleteResponse?.data);
-            toast.success('Successfully removed item(s) from cart!');
         } catch (err) {
             if(!err?.response) {
                 toast.error('Server Connection Timed Out');
             } else {
                 toast.error('Failed to remove item from cart.');
             }
+            return;
         }
+
+        setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== id));
     };
 
     const updateCartItemQuantity = async (id, newQuantity) => {
@@ -69,7 +78,23 @@ const useCart = () => {
             toast.error("Couldn't Update Item Quantity: Exceeds Available Stock");
             return existingItem.quantity;
         }
-
+        
+        try {
+            // eslint-disable-next-line
+            const updateResponse = await toast.promise(axios.put(`/api/cart/${id}`,
+                { set: true, quantity: newQuantity }), {
+                    pending: 'Updating item quantity...',
+                    success: 'Successfully updated the quantity of the item!',
+                    error: 'Something went wrong'
+                });
+        } catch (err) {
+            if(!err?.response) {
+                toast.error('Server Connection Timed Out');
+            } else {
+                toast.error('Failed to update quantity of the item');
+            }
+        }
+        
         setCart(prevCart => {
             const updatedCart = [...prevCart];
             const cartItem = updatedCart.find(cartItem => cartItem.id === id);
@@ -79,19 +104,7 @@ const useCart = () => {
             }
             return updatedCart;
         });
-        
-        try {
-            const updateResponse = await axios.put(`/api/cart/${id}`,
-                                { set: true, quantity: newQuantity });
-            console.log(updateResponse?.data);
-            toast.success('Successfully updated the quantity of the item!');
-        } catch (err) {
-            if(!err?.response) {
-                toast.error('Server Connection Timed Out');
-            } else {
-                toast.error('Failed to update quantity of the item');
-            }
-        }
+
         return newQuantity;
     }
 

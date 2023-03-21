@@ -1,6 +1,7 @@
 const database = require ('../database/database');
 const books = require ('../books/books');
 
+// Returns all cart items; no specified order
 const getCartItems = async () => {
     const cartResponse = await database.readEntryArray('cart', {}, {});
     if (cartResponse) {
@@ -8,6 +9,7 @@ const getCartItems = async () => {
     }
 }
 
+// Adds item to cart collection
 const addItemToCart = async (data) => {
     console.log(data);
     const {
@@ -46,6 +48,8 @@ const addItemToCart = async (data) => {
     }
 }
 
+// Used to empty the cart ALSO decrements the available inventory of
+// each book by the amount the user purchased
 const clearCart = async () => {
     console.log("Decrementing the available inventory for each item...");
     const cart = await getCartItems();
@@ -66,6 +70,7 @@ const clearCart = async () => {
     }
 }
 
+// Updates the quantity of an item in the cart
 const updateQuantity = async (id, newQuantity) => {
     try {
         const updateResponse = await database.updateEntry('cart', { id: id }, 'set', Number(newQuantity), 'quantity');
@@ -80,6 +85,8 @@ const updateQuantity = async (id, newQuantity) => {
     }
 }
 
+// Increments the quantity of an item in the cart by 1
+// Think pressing Add to Cart a second time vs using the quantity dropdowns
 const incrementQuantity = async (id) => {
     try {
         const updateResponse = await database.updateEntry('cart', { id: id }, 'inc', 1, 'quantity');
@@ -94,6 +101,8 @@ const incrementQuantity = async (id) => {
     }
 }
 
+
+// deletes and item from the cart
 const deleteItem = async (id) => {
     try {
         const deleteResponse = await database.deleteEntry('cart', { id: id });

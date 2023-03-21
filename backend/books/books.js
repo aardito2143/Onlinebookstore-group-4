@@ -1,5 +1,6 @@
 const database = require('../database/database');
 
+// Creates a book, you get the idea from the users/ database one
 const createBook = async (data) => {
     const { 
         title, 
@@ -38,6 +39,8 @@ const createBook = async (data) => {
     }
 }
 
+// Updates the book, these start to become really
+// self-explanatory as you go through this pipeline
 const updateBook = async(book, data) => {
     console.log("Updating book with new data...");
     console.log(book, data);
@@ -56,6 +59,9 @@ const updateBook = async(book, data) => {
     }
 }
 
+// This is used to decrement the books available inventory by the amount
+// passed in the qty arguement. In the future this could be updated for increasing the
+// qty and attaching the 'restocking' feature we never got around to, to it.
 const updateBookInventory = async (book, qty) => {
     console.log("Updating inventory of book...");
     console.log(book);
@@ -72,9 +78,10 @@ const updateBookInventory = async (book, qty) => {
     }
 }
 
-const getBooks = async () => {
-    const query = {}
-    const sort = { title: -1 };
+// Rather than a regular readEntry this one uses readEntryArray
+// The difference is rather than getting back an individual object
+// you get back an array of objects => [{},{},{}]
+const getBooks = async (query={}, sort={ title: 1 }) => {
     const books = database.readEntryArray('books', query, sort);
     if (books) {
         console.log("Successfully retrieved books!");

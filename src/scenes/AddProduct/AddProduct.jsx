@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { axiosPrivate } from "../../api/axios";
 import { toast } from "react-toastify";
 const BOOKS_URL = '/api/products';
 
-export default function () {
-    const navigate = useNavigate();
+export default function AddProduct () {
     
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
