@@ -22,12 +22,13 @@
     "stripe": "^11.13.0",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://35.168.3.184",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "backend": "node /backend/index.js"
   },
   "eslintConfig": {
     "extends": [

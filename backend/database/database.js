@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const uri = 'mongodb+srv://ctuteama:ctuteama@cluster0.h4bah9x.mongodb.net/test';
+const uri = process.env.DATABASE_URI;
 const client = new MongoClient(uri);
 
 /* This database uses a pretty basic implementation of CRUD operations
