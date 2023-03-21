@@ -10,13 +10,18 @@ body{
   background: linear-gradient(to bottom right, #f7f5fb, #909cc2, #f9ab55, #f9ab55, #909cc2,#f7f5fb);
   background-size: 400%;
 }
+
+.error-page-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #error-page{
   font-family: 'Fredoka One', sans-serif;
-  position: absolute;
-  top: 10%;
-  left: 15%;
-  right: 15%;
-  bottom: 10%;
+  width: 80%;
+  height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,13 +29,17 @@ body{
   box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
 }
 #error-page .content{
-  max-width: 600px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .content h2.header{
-  font-size: 18vw;
+  font-size: 14vw;
   line-height: 1em;
   position: relative;
+  width: 100%;
 }
 .content h2.header:after{
   position: absolute;
@@ -38,10 +47,11 @@ body{
   top: 0;
   left: 0;
   right: 0;
+  color: #f9ab55;
   /* background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6); */
   background-size: 400%;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.25);
+  /* -webkit-text-fill-color: transparent; */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.967);
   animation: animate 10s ease-in-out infinite;
 }
 @keyframes animate {
@@ -62,11 +72,11 @@ body{
   }
 }
 .content h4{
-  font-size: 1.5em;
+  font-size: 2em;
+  line-height: 1em;
   margin-bottom: 20px;
   text-transform: uppercase;
   color: #000;
-  font-size: 2em;
   max-width: 600px;
   position: relative;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
@@ -11,8 +11,6 @@ export default function Navbar () {
     const { auth, cart, setCart } = useAuth();
     const { totalQuantity } = useCart();
 
-    console.log(auth);
-
     const handleClick = () => {
         navigate('/checkout');
     }
@@ -21,9 +19,7 @@ export default function Navbar () {
         const getCart = async () => {
             try {
                 const response = await axios('/api/cart');
-                console.log(response?.data);
                 setCart(response.data);
-                toast.success('Successfully retreived Cart!');
             } catch (err) {
                 if(!err?.response) {
                     toast.error('Server Connection Timed Out');
@@ -34,7 +30,7 @@ export default function Navbar () {
         }
 
         getCart();
-    }, [])
+    }, [setCart])
 
     return (
         <nav>
@@ -53,10 +49,10 @@ export default function Navbar () {
                             )}
                         </ul>
                     </li>
-                    <li><Link to="/books">Books</Link>
+                    <li><Link to="/">Books</Link>
                         <ul>
-                            <li><a href="#best-sellers">Best Sellers</a></li>
-                            <li><a href="#classics">Classics</a></li>
+                            <li><a href="/books/best-sellers">Best Sellers</a></li>
+                            <li><a href="/books/classics">Classics</a></li>
                         </ul>
                     </li>
                     <li><Link to="/contact-us">Contact Us</Link></li>

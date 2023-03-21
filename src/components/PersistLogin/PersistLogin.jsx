@@ -26,12 +26,9 @@ const PersistLogin = () => {
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
         return () => isMounted = false;
-    }, []);
-
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`);
-        console.log(`accessToken: ${JSON.stringify(auth?.accessToken)}`);
-    }, [isLoading])
+    }, 
+    // eslint-disable-next-line
+    []);
 
     return (
         <>

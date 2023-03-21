@@ -1,33 +1,26 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 
 // REGEX pattern to check the validity of the password entry
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
 
 export default function Register() {
     // Store navigation function, this allows some navigation methods
-    const navigate = useNavigate();
     const emailRef = useRef(null);
     const errRef = useRef(null);
 
     // Email states
     const [email, setEmail] = useState('');
-    const [validEmail, setValidEmail] = useState(false);
-    const [emailFocus, setEmailFocus] = useState(false);
 
     // Password states
     const [pass, setPass] = useState('');
     const [validPass, setValidPass] = useState(false);
-    const [passFocus, setPassFocus] = useState(false);
 
     // Password Confimation states
     const [matchPass, setMatchPass] = useState('');
     const [validMatch, setValidMatch] = useState(false);
-    const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
+    
     useEffect(() => {
         if (emailRef.current) {
             emailRef.current.focus();
@@ -97,8 +90,6 @@ export default function Register() {
                         autoCapitalize='none' 
                         autoCorrect='none'
                         autoComplete='off'
-                        onFocus={() => setEmailFocus(true)}
-                        onBlur={() => setEmailFocus(false)}
                         autoFocus
                         required />
                 </div>
@@ -106,8 +97,6 @@ export default function Register() {
                     <label htmlFor='password'>Password</label>
                     <input
                         onChange={(e) => setPass(e.target.value)}
-                        onFocus={() => setPassFocus(true)}
-                        onBlur={() => setPassFocus(false)}
                         id='password' 
                         className='form-input' 
                         name='password' 
@@ -127,8 +116,6 @@ export default function Register() {
                         autoCapitalize='none'
                         autoCorrect='none'
                         onChange={(e) => setMatchPass(e.target.value)}
-                        onFocus={() => setMatchFocus(true)}
-                        onBlur={() => setMatchFocus(false)}
                         aria-invalid={validMatch ? "false" : "true"}>
 
                     </input>

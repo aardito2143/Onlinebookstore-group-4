@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -134,12 +134,18 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   }
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 
+  header#title{
+    margin-top: -4.5em;
+    background:none;
+    
+  }
+
 body{
   align-items: center;
   justify-content: center;
-  background:#f7f5fb;;
+  background:#909cc2;;
 } 
-.container{
+#page{
   max-width: 800px;
   background: #fff;
   width: 800px;
@@ -148,8 +154,9 @@ body{
   margin-left: 30rem;
   margin-top: 6rem;
   font-family: "Fredoka One";
+  color: #084887;
 }
-.container .text{
+#page .text{
   text-align: center;
   font-size: 38px;
   font-weight: 600;
@@ -158,15 +165,19 @@ body{
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.container form{
+#page .form{
   padding: 30px 0 0 0;
 }
-.container form .form-row{
+#page form .form-row{
   display: flex;
   margin: 32px 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
 }
+.fourth, .productitm, .extracosts, .totalprice {
+  padding-left: 12em;
+}
+
 form .form-row .input-data{
   width: 100%;
   height: 40px;
@@ -190,7 +201,7 @@ form .form-row .textarea{
 .input-data input:valid ~ label, .textarea textarea:valid ~ label{
   transform: translateY(-20px);
   font-size: 14px;
-  color: #084887;
+  color: #3e9bf8;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .textarea textarea{
@@ -207,7 +218,7 @@ form .form-row .textarea{
 .textarea label{
   width: 100%;
   bottom: 40px;
-  background: #fff;
+  background: #ebe7e7;
 }
 .input-data .underline{
   position: absolute;
@@ -258,6 +269,107 @@ form .form-row .textarea{
   cursor: pointer;
   position: relative;
   z-index: 2;
+  
+}
+
+
+/* #page {
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+} */
+#cart {
+  display: block;
+  border-collapse: collapse;
+  margin: 0;
+  width: 100%;
+  
+}
+#cart thead th {
+  padding: 10px 39px;
+  font-weight: bold;
+}
+
+#cart thead th.first {
+  width: 155px;
+}
+#cart thead th.second {
+  width: 57px;
+}
+#cart thead th.third {
+  width: 250px;
+}
+#cart thead th.fourth {
+  width: 10px;
+}
+#cart thead th.fifth {
+  width: 1px;
+}
+td.checkout {
+  padding: 12px 0;
+  padding-top: 20px;
+  width: 100%;
+  text-align: right;
+}
+tr.totalprice, tr.extracosts {
+  height: 35px;
+  line-height: 35px;
+}
+
+.checkout-remove-btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.checkout-remove-btn svg {
+  fill: #084887;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#submitbtn {
+  width: 150px;
+  height: 35px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+  letter-spacing: 0.05em;
+  font-family: Arial, Tahoma, sans-serif;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid #c8cfca;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, darkgreen), color-stop(100%,lightgreen));
+  background-image: -webkit-linear-gradient(darkgreen, lightgreen);
+  background-image: -moz-linear-gradient(darkgreen, lightgreen);
+  background-image: -o-linear-gradient(darkgreen, lightgreen);
+  background-image: linear-gradient(darkgreen, lightgreen);
+}
+#submitbtn:hover {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4dff74), color-stop(100%, #287510));
+  background-image: -webkit-linear-gradient(#4dff74, #287510);
+  background-image: -moz-linear-gradient(#4dff74, #287510);
+  background-image: -o-linear-gradient(#4dff74, #287510);
+  background-image: linear-gradient(#4dff74, #287510);
+}
+#submitbtn:active {
+  border-bottom: 0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #32be61,), color-stop(100%,  #4ef887));
+  background-image: -webkit-linear-gradient(#32be61, #4ef887);
+  background-image: -moz-linear-gradient(#32be61, #4ef887);
+  background-image: -o-linear-gradient(#32be61, #4ef887);
+  background-image: linear-gradient(#32be61, #4ef887);
+  -webkit-box-shadow: inset 0 1px 3px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0 1px 3px 1px rgba(0,0,0,0.25);
+  box-shadow: inset 0 1px 3px 1px rgba(0,0,0,0.25);
 }
 @media (max-width: 700px) {
   .container .text{
