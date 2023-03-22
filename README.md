@@ -23,6 +23,9 @@ Full Stack online bookstore for purchasing mystery themed novels.
 <img src="https://drive.google.com/uc?export=view&id=13tg_AwGSOal7LWdKp2-yCdCv8hAa7_aw" />*Homepage with carousel items and toast notifcations*
 
 
+<img src="https://github.com/aardito2143/Onlinebookstore-group-4/blob/main/feature_showcase.gif" />  *GIF showing carousel and sidebar features*
+
+
 <img src="https://drive.google.com/uc?export=view&id=1BpVznh_9Z5JPb270BXNVRoP6iatkJGtl" />*Stripe payment integration*
 
 
