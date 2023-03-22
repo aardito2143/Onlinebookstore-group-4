@@ -8,7 +8,12 @@ export default function Checkout() {
     const { cart } = useAuth();
     const { removeCartItem, updateCartItemQuantity, totalCost } = useCart();
     const shippingTax = '35.00';
-    console.log(cart);
+    let BASE_URL = '';
+    if (process.env.NODE_ENV === 'development'){
+      BASE_URL = 'http://localhost:3000'
+    } else {
+      BASE_URL = 'https://localhost:3000'
+    }
     
     async function handleCheckout() {
         const modifiedCart = cart.map(item => (
@@ -20,9 +25,8 @@ export default function Checkout() {
         const { error } = await stripe.redirectToCheckout({
           lineItems: [...modifiedCart, { price: 'price_1MmwUYBFILIPC5HyqNB5T9yL', quantity: 1 }],
           mode: 'payment',
-          successUrl: `http://localhost:3000/success`,
-          cancelUrl: `http://localhost:3000/cancel`,
-          customerEmail: 'adam.ardito@yahoo.com',
+          successUrl: `${BASE_URL}/success`,
+          cancelUrl: `${BASE_URL}/cancel`,
         });
         console.warn(error.message);
     }

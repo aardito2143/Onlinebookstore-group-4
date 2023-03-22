@@ -74,6 +74,24 @@ app.post('/api/authentication', async (req, res) => {
     }
 });
 
+app.get('/api/logout', async (req, res) => {
+    const cookies = req.cookies;
+    if(!cookies?.jwt) {
+        console.log("No Cookies Provided");
+        return res.status(401).json("No Token Provided");
+    }
+
+    const refreshToken = cookies.jwt;
+
+    try {
+        const logoutResponse = await users.signOutUser(refreshToken);
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+        return res.status(200).json({ message: "Successfully signed out the User!" });
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 
 // This is the products endpoint for creating a new product in the database
 app.post('/api/products', async (req, res) => {
@@ -266,6 +284,17 @@ app.delete('/api/cart/:id', async (req, res) => {
     In more extreme cases you can even do this over the public internet as well though that's usually frowned upon
     without using a company VPN between the devices.
 */
-app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}...`);
-});
+
+if (process.env.NODE_ENV === 'development') {
+    app.listen(PORT, () => {
+        console.log("Launched the backend in development mode!")
+        console.log(`Server listening on ${PORT}...`);
+    });
+} else if (process.env.NODE_ENV === 'production') {
+    app.listen(PORT, () => {
+        console.log("Launched the backend in production mode!");
+        console.log(`Server listening on ${PORT}...`);
+    });
+} else {
+    console.log("No evironment specified. Please run the backend with either the development or production environment commands.");
+}

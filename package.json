@@ -10,6 +10,7 @@
     "axios": "^1.3.4",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "backend_dev": "cross-env NODE_ENV=development nodemon ./backend/index.js",
+    "backend_prod": "cross-env NODE_ENV=production nodemon ./backend/index.js"
   },
   "eslintConfig": {
     "extends": [

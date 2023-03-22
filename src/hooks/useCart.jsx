@@ -3,7 +3,24 @@ import axios from "../api/axios";
 import { toast } from "react-toastify";
 
 const useCart = () => {
-    const { cart, setCart } = useAuth();
+    const { cart, setCart, auth } = useAuth();
+
+    const getCart = async () => {
+        if (auth?.accessToken) {
+            try {
+                const response = await axios('/api/cart');
+                setCart(response.data);
+            } catch (err) {
+                if(!err?.response) {
+                    toast.error('Server Connection Timed Out');
+                } else if (err?.response?.status === 400) {
+                    toast.error('Failed to fetch the cart');
+                }
+            }
+        } else {
+            setCart([]);
+        }
+    }
 
     const addToCart = async (item) => {
         const existingItem = cart.find((cartItem) => cartItem.id === item.id);
@@ -13,13 +30,15 @@ const useCart = () => {
         }
 
         if (existingItem) {
-            // eslint-disable-next-line
-            const updateResponse = await toast.promise(axios.put(`/api/cart/${existingItem.id}`,
-                    { set: false }), {
-                        pending: 'Adding item to cart...',
-                        success: `Successfully added ${item.title} to cart!`,
-                        error: 'Something went wrong'
-                    });
+            if(auth?.accessToken){
+                // eslint-disable-next-line
+                const updateResponse = await toast.promise(axios.put(`/api/cart/${existingItem.id}`,
+                        { set: false }), {
+                            pending: 'Adding item to cart...',
+                            success: `Successfully added ${item.title} to cart!`,
+                            error: 'Something went wrong'
+                        });
+            }
             const updatedCart = cart.map((cartItem) => {
                 if (cartItem.id === existingItem.id) {
                     return { ...cartItem, quantity: cartItem.quantity + 1 };
@@ -29,12 +48,14 @@ const useCart = () => {
             setCart(updatedCart);
         } else {
             try {
-                // eslint-disable-next-line
-                const response = await toast.promise(axios.post('/api/cart', { item }), {
-                    pending: 'Adding item to cart...',
-                    success: `Successfully added ${item.title} to cart!`,
-                    error: 'Something went wrong'
-                });
+                if(auth?.accessToken){
+                    // eslint-disable-next-line
+                    const response = await toast.promise(axios.post('/api/cart', { item }), {
+                        pending: 'Adding item to cart...',
+                        success: `Successfully added ${item.title} to cart!`,
+                        error: 'Something went wrong'
+                    });
+                }
                 setCart([...cart, { ...item, quantity: 1 }]);
             } catch (err) {
                 if (!err?.response) {
@@ -50,12 +71,14 @@ const useCart = () => {
 
     const removeCartItem = async (id) => {
         try {
-            const deleteResponse = await toast.promise(axios.delete(`/api/cart/${id}`), {
-                pending: 'Removing item(s) from cart',
-                success: 'Successfully removed item(s) from cart!',
-                error: 'Something went wrong.'
-            });
-            console.log(deleteResponse?.data);
+            if (auth?.accessToken) {
+                // eslint-disable-next-line
+                const deleteResponse = await toast.promise(axios.delete(`/api/cart/${id}`), {
+                    pending: 'Removing item(s) from cart',
+                    success: 'Successfully removed item(s) from cart!',
+                    error: 'Something went wrong.'
+                });
+            }
         } catch (err) {
             if(!err?.response) {
                 toast.error('Server Connection Timed Out');
@@ -80,13 +103,15 @@ const useCart = () => {
         }
         
         try {
+            if (auth?.accessToken){
             // eslint-disable-next-line
-            const updateResponse = await toast.promise(axios.put(`/api/cart/${id}`,
-                { set: true, quantity: newQuantity }), {
-                    pending: 'Updating item quantity...',
-                    success: 'Successfully updated the quantity of the item!',
-                    error: 'Something went wrong'
+                const updateResponse = await toast.promise(axios.put(`/api/cart/${id}`,
+                    { set: true, quantity: newQuantity }), {
+                        pending: 'Updating item quantity...',
+                        success: 'Successfully updated the quantity of the item!',
+                        error: 'Something went wrong'
                 });
+            }
         } catch (err) {
             if(!err?.response) {
                 toast.error('Server Connection Timed Out');
@@ -112,7 +137,8 @@ const useCart = () => {
 
     const totalCost = cart.reduce((total, cartItem) => total + (Number(cartItem.cost) * cartItem.quantity), 0);
     
-    return { 
+    return {
+        getCart,
         addToCart,
         removeCartItem,
         updateCartItemQuantity,

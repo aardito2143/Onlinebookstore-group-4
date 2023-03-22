@@ -153,6 +153,42 @@ const signInUser = async (email, pass) => {
     }
 }
 
+const signOutUser = async (refreshToken) => {
+    console.log("Attempting to sign out user...");
+    try {
+        const decoded = await new Promise ((resolve, reject) => {
+            jwt.verify(
+                refreshToken,
+                'mysecretrefreshkey',
+                (err, decoded) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(decoded);
+                    }
+                }
+            )
+        });
+
+        const userExists = await database.readEntry('users', { email: decoded.email });
+
+        if(!userExists) {
+            return;
+        }
+
+        const tokenResponse = await database.updateEntry('users',
+            { email: decoded.email },
+            'set', '', 'refresh_token');
+
+        if(tokenResponse) {
+            return;
+        }
+    } catch (err) {
+        console.log(err);
+        return;
+    }
+}
+
 const handleRefreshToken = async (refreshToken) => {
     console.log("Attempting to refresh user's access token...");
     // Create refrences in the functions scope to access them after the internal function
@@ -192,5 +228,6 @@ const handleRefreshToken = async (refreshToken) => {
 module.exports = {
     createUser,
     signInUser,
-    handleRefreshToken
+    handleRefreshToken,
+    signOutUser
 }

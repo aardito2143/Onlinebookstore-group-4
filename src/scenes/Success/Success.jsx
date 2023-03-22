@@ -1,33 +1,17 @@
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 import SummaryItem from "../../components/SummaryItem/SummaryItem";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "../../api/axios";
-import { toast } from "react-toastify";
 import "./Success.css";
 
 export default function Success() {
-    const { cart, setCart } = useAuth();
+    const { cart } = useAuth();
+    const { getCart } = useCart();
     const [isLoading, setIsLoading] = useState(false);
     
     useEffect(() => {
         setIsLoading(true);
-        const getCart = async () => {
-            try {
-                const response = await axios('/api/cart');
-                setCart(response.data);
-                setIsLoading(false);
-                // eslint-disable-next-line
-                const deleteResponse = await axios.delete('/api/cart');
-            } catch (err) {
-                if(!err?.response) {
-                    toast.error('Server Connection Timed Out');
-                } else if (err?.response?.status === 400) {
-                    toast.error('Failed to fetch the cart');
-                }
-            }
-        }
-
         getCart();
     },
     // eslint-disable-next-line

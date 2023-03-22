@@ -2,35 +2,28 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
-import axios from "../../api/axios";
+import useLogout from "../../hooks/useLogout";
 import "./Navbar.css";
-import { toast } from "react-toastify";
 
 export default function Navbar () {
     const navigate = useNavigate();
-    const { auth, cart, setCart } = useAuth();
-    const { totalQuantity } = useCart();
+    const logout = useLogout();
+    const { auth, cart } = useAuth();
+    const { totalQuantity, getCart } = useCart();
 
     const handleClick = () => {
         navigate('/checkout');
     }
 
-    useEffect(() => {
-        const getCart = async () => {
-            try {
-                const response = await axios('/api/cart');
-                setCart(response.data);
-            } catch (err) {
-                if(!err?.response) {
-                    toast.error('Server Connection Timed Out');
-                } else if (err?.response?.status === 400) {
-                    toast.error('Failed to fetch the cart');
-                }
-            }
-        }
+    const handleLogout = async () => {
+        await logout();
+    }
 
+    useEffect(() => {
         getCart();
-    }, [setCart])
+    }, 
+    // eslint-disable-next-line
+    []);
 
     return (
         <nav>
@@ -40,7 +33,7 @@ export default function Navbar () {
                     <li><Link to="/account">Account</Link>
                         <ul className="">
                             {auth && auth?.accessToken ? (
-                                <li><Link to="/logout">Logout</Link></li>
+                                <li><Link onClick={handleLogout}>Logout</Link></li>
                             ) : (
                                 <div>
                                     <li><Link to="/login">Login</Link></li>
@@ -57,11 +50,14 @@ export default function Navbar () {
                     </li>
                     <li><Link to="/contact-us">Contact Us</Link></li>
                     <li><Link to="/about">About</Link></li>
-                    <li><Link to="/dashboard">Admin</Link>
-                        <ul style={{ zIndex: 2 }}>
-                            <li><Link to="/dashboard" >Dashboard</Link></li>
-                        </ul>
-                    </li>
+                    {auth?.role === 'admin' && 
+                        <li>
+                            <Link to="/dashboard">Admin</Link>
+                                <ul style={{ zIndex: 2 }}>
+                                    <li><Link to="/dashboard" >Dashboard</Link></li>
+                                </ul>
+                        </li>
+                    }    
                 </ul>
                 <div className="Cart">
                     <button type="button" onClick={handleClick}>

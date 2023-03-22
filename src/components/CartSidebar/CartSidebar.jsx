@@ -5,34 +5,29 @@ import "./CartSidebar.css";
 
 export default function CartSidebar () {
     const { updateCartItemQuantity, removeCartItem, totalCost } = useCart();
-    const { cart } = useAuth();
+    const { cart, auth } = useAuth();
 
     return (
         <>
             {cart && cart.length > 0 ? (
                 <div className='cart-sidebar-container'>
+                    {!auth?.accessToken && <p className="no-auth-warn">WARNING: You are not signed in. Your cart will not be saved.</p>}
                     <div className="cart-sidebar-subtotal">SubTotal: ${(Math.round((totalCost) * 100 ) / 100 ).toFixed(2)}</div>
-                    <div className="cart-sidebar-scroller">
+                    <div className="cart-sidebar-scroller" style={!auth?.accessToken ? { height: 'calc(100% - 207px)'} : { height: 'calc(100% - 151px)' }}>
                         <div className="cart-sidebar-content">
-                            {cart.map((cartItem) =>
-                                    <div className='cart-sidebar-item'>
+                            {cart.map((cartItem, index) =>
+                                    <div className='cart-sidebar-item' key={index}>
                                         <ImgPlaceholder 
                                             src={`/images/${cartItem.title.replace(/[^A-Z0-9]/ig, "").toLowerCase()}.jpg`} 
                                             name='cart-sidebar-thumbnail' 
                                             width='100px'
                                             height='152px' />
-                                        {/* <img
-                                            className='cart-sidebar-thumbnail' 
-                                            src={`/images/${cartItem.title.replace(/[^A-Z0-9]/ig, "").toLowerCase()}.jpg`}
-                                            alt={cartItem.title}
-                                        /> */}
                                         <p className='cart-sidebar-price'>${cartItem.cost}</p>
                                         <div style={{ display: 'flex', width: '100%', justifyContent: 'center', gap: '10px' }}>
                                             <select
                                                 className='cart-sidebar-dropdown'
                                                 id="checkout-select-field"
                                                 name="checkout-selectfield"
-                                                defaultValue={cartItem.quantity}
                                                 value={cartItem.quantity}
                                                 onChange={(e) => updateCartItemQuantity(cartItem.id, Number(e.target.value))}
                                                 required>
