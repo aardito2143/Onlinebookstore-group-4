@@ -11,7 +11,11 @@ root.render(
   <React.StrictMode>
     <ContextProvider>
       <App />
-      <ToastContainer />
+      <ToastContainer 
+        position='top-center'
+        autoClose={3000}
+        closeOnClick
+      />
     </ContextProvider>
   </React.StrictMode>
 );

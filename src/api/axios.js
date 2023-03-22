@@ -1,5 +1,11 @@
 import axios from "axios";
-const BASE_URL = 'http://localhost:3000';
+
+let BASE_URL = ''
+if (process.env.NODE_ENV === 'development'){
+    BASE_URL = 'http://localhost:3000';
+} else {
+    BASE_URL = 'https://localhost:3000';
+}
 
 export default axios.create({
     baseURL: BASE_URL
