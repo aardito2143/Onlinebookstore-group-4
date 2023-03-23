@@ -16,7 +16,7 @@ const httpsOptions = {
 };
 
 const corsOptions = {
-  origin: "https://ec2-54-175-236-193.compute-1.amazonaws.com:3000",
+  origin: "https://ec2-54-175-236-193.compute-1.amazonaws.com",
   credentials: true,
 };
 
@@ -183,7 +183,7 @@ app.get("/api/token/refresh", async (req, res) => {
     if (process.env.NODE_ENV === "production") {
       res.setHeader(
         "Access-Control-Allow-Origin",
-        "https://ec2-54-175-236-193.compute-1.amazonaws.com:3000"
+        "https://ec2-54-175-236-193.compute-1.amazonaws.com"
       );
       res.setHeader("Access-Control-Allow-Credentials", "true");
     }
@@ -208,7 +208,7 @@ app.get("/api/books", async (req, res) => {
       if (process.env.NODE_ENV === "production") {
         res.setHeader(
           "Access-Control-Allow-Origin",
-          "https://ec2-54-175-236-193.compute-1.amazonaws.com:3000"
+          "https://ec2-54-175-236-193.compute-1.amazonaws.com"
         );
         res.setHeader("Access-Control-Allow-Credentials", "true");
       }
@@ -247,7 +247,7 @@ app.get("/api/books/:category", async (req, res) => {
       if (process.env.NODE_ENV === "production") {
         res.setHeader(
           "Access-Control-Allow-Origin",
-          "https://ec2-54-175-236-193.compute-1.amazonaws.com:3000"
+          "https://ec2-54-175-236-193.compute-1.amazonaws.com"
         );
         res.setHeader("Access-Control-Allow-Credentials", "true");
       }
