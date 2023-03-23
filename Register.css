@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+::selection {
+  color: #fff;
+  background: #5372f0;
+}
+.register-page {
+  font-family: "Roboto", "sans-serif";
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-return-home {
+  position: fixed;
+  top: 10px;
+  left: 5px;
+}
+.register-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  width: 400px;
+}
+.form-section:has(#email) {
+  margin-bottom: 15px;
+}
+.form-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: 2px solid rgba(100, 100, 100, 0.2);
+}
+.form-input:hover {
+  border-bottom: 2px solid black;
+}
+.form-section label {
+  line-height: 1rem;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.form-input {
+  font-size: 1rem;
+  padding: 1em 1em;
+  border: none;
+}
+.form-btn {
+  background: linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55);
+  width: 100%;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 2rem;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+.form-btn:hover {
+  outline: 4px solid #f58a07;
+  color: #f58a07;
+  transition: 0.4s;
+}
