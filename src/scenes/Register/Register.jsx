@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "./Register.css";
 
 // REGEX pattern to check the validity of the password entry
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
@@ -76,12 +77,17 @@ export default function Register() {
     <div
       className="register-container"
       style={{
-        margin: ".01em 25em",
+        display: "flex",
+        margin: "-2.5em 32em ",
         boxSizing: "border-box",
-        width: "45%",
-        height: "10vh",
+        width: "400px",
+        height: "100%",
         background: "transparent",
-        padding: "40px 45px 50px",
+        padding: "0",
+
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "Roboto",
       }}
     >
       <form
@@ -89,20 +95,35 @@ export default function Register() {
         onSubmit={handleSubmit}
         style={{
           background: "#fff",
-          padding: "40px 30px 50px 30px",
+          padding: "2em 2em",
           borderRadius: "5px",
           textAlign: "center",
           boxShadow: "10px 10px 15px rgba(0,0,0,0.1)",
+          display: "flex",
+          flexDirection: "column",
+          alighnItems: "center",
         }}
       >
+        <a
+          style={{
+            color: "black",
+            marginLeft: "-20em",
+            marginTop: "-3.5em",
+          }}
+          class="form-forgot-pass"
+          href="/"
+        >
+          Return to Home
+        </a>
         <h1
           className="register-title"
           style={{
-            fontSize: "35px",
-            fontWeight: "600",
+            fontSize: "2em",
+            fontWeight: "900",
             color: "#F58A07",
             fontFamily: "Fredoka One",
-            textShadow: "1px 3px 4px #909CC2",
+            textShadow: "1px 2px 0px #909CC2",
+            margin: "30px",
           }}
         >
           Sign Up
@@ -124,11 +145,18 @@ export default function Register() {
           style={{
             width: "100%",
             marginBottom: "20px",
-            Animation: "shake 0.3s ease-in-out",
             color: "black",
+            display: "flex",
+            flexDirection: "column",
+            borderBottom: "2px solid rgba(100, 100, 100, 0.2)",
           }}
         >
-          <label htmlFor="email"></label>
+          <label
+            htmlFor="email"
+            style={{
+              marginBottom: "15px",
+            }}
+          ></label>
           <input
             onChange={(e) => setEmail(e.target.value)}
             id="email"
@@ -142,17 +170,17 @@ export default function Register() {
             onBlur={() => setEmailFocus(false)}
             autoFocus
             required
-            placeholder="Email Address"
+            placeholder="Enter your email"
             style={{
               width: "55%",
               height: "100%",
               outline: "none",
-              padding: "10px 30px 10px 30px",
-              fontSize: "18px",
+              padding: "10px 10px 10px 10px",
+              fontSize: "14px",
               background: "none",
               caretColor: "#5372F0",
               borderRadius: "5px",
-              border: "1px solid #bfbfbf",
+              border: "none",
               borderBottomWidth: "2px",
               transition: "all 0.2s ease",
             }}
@@ -163,7 +191,6 @@ export default function Register() {
           style={{
             width: "100%",
             marginBottom: "30px",
-            Animation: "shake 0.3s ease-in-out",
             color: "black",
           }}
         >
@@ -180,18 +207,18 @@ export default function Register() {
             autoCorrect="none"
             aria-invalid={validPass ? "false" : "true"}
             required
-            placeholder="Password"
+            placeholder="Enter a password"
             style={{
               width: "55%",
               marginTop: "1em",
               height: "100%",
               outline: "none",
-              padding: "10px 30px 10px 30px",
-              fontSize: "18px",
+              padding: "10px 30px 10px 10px",
+              fontSize: "14px",
               background: "none",
               caretColor: "#5372F0",
               borderRadius: "5px",
-              border: "1px solid #bfbfbf",
+              border: "none",
               borderBottomWidth: "2px",
               transition: "all 0.2s ease",
             }}
@@ -210,18 +237,18 @@ export default function Register() {
             onFocus={() => setMatchFocus(true)}
             onBlur={() => setMatchFocus(false)}
             aria-invalid={validMatch ? "false" : "true"}
-            placeholder="Confirm Password"
+            placeholder="Confirm password"
             style={{
               width: "55%",
-              marginTop: ".5em",
+              marginTop: ".1em",
               height: "100%",
               outline: "none",
-              padding: "10px 30px 10px 30px",
-              fontSize: "18px",
+              padding: "10px 30px 10px 10px",
+              fontSize: "14px",
               background: "none",
               caretColor: "#5372F0",
               borderRadius: "5px",
-              border: "1px solid #bfbfbf",
+              border: "none",
               borderBottomWidth: "2px",
               transition: "all 0.2s ease",
             }}
@@ -230,17 +257,18 @@ export default function Register() {
         <button
           style={{
             height: "50px",
-            marginTop: "25px",
+            marginTop: "20px",
             color: "#fff",
             padding: "0 2em 0 2em",
             border: "none",
-            background: "#5372F0",
+            background:
+              "linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55)",
             cursor: "pointer",
             borderBottom: "2px solid rgba(0,0,0,0.1)",
             transition: "all 0.3s ease",
             fontSize: "1em",
             fontFamily: "Tahoma",
-            marginLeft: "3em",
+            marginLeft: ".5em",
             borderRadius: ".5em",
             textDecoration: "none",
           }}
@@ -253,8 +281,8 @@ export default function Register() {
         <label
           style={{
             color: "black",
-            marginRight: "-4.5em",
-            marginLeft: "5em",
+            marginTop: "3em",
+            fontSize: ".6em",
           }}
         >
           Already A Member?
@@ -262,18 +290,19 @@ export default function Register() {
         <button
           style={{
             height: "50px",
-            marginTop: "25px",
-            color: "#fff",
+            marginTop: "2px",
+            fontcolor: "#fff",
             padding: "0 2em 0 2em",
             border: "none",
-            background: "#5372F0",
+            background:
+              "linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55)",
+            cursor: "pointer",
             borderBottom: "2px solid rgba(0,0,0,0.1)",
             transition: "all 0.3s ease",
             fontSize: "1em",
             fontFamily: "Tahoma",
-            marginLeft: "5em",
+            marginLeft: ".5em",
             borderRadius: ".5em",
-            textDecoration: "none",
           }}
           type="submit"
           className="form-btn"
@@ -282,9 +311,10 @@ export default function Register() {
             to="/login"
             style={{
               color: "#fff",
+              fontWeight: "700",
             }}
           >
-            Sign-In
+            Log-In
           </Link>
         </button>
       </form>

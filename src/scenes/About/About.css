@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.about-us {
+  height: 100vh;
+  width: 100%;
+  padding: 90px 0px;
+  background: transparent;
+}
+.about {
+  width: 1130px;
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.about-text {
+  width: 650px;
+}
+.about-text h2 {
+  font-size: 85px;
+  font-weight: 100;
+  margin-bottom: 10px;
+  font-family: Fredoka One;
+  line-height: 1em;
+}
+.about-text h5 {
+  font-size: 29px;
+  font-weight: 500;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.about-text p {
+  font-size: 18px;
+  line-height: 40px;
+  letter-spacing: 1px;
+}
+.about-us data {
+  margin-top: 30px;
+}
+.contact-btn {
+  font-size: 18px;
+  background: rgb(78, 78, 206);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 6px;
+  transition: 0.5s;
+}
+.contact-btn:hover {
+  background: #f8ae0f;
+  border: 1px solid #f8ae0f;
+}
