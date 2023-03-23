@@ -10,10 +10,18 @@ const cookieParser = require("cookie-parser");
 const PORT = 3001;
 const app = express();
 
-const httpsOptions = {
-  key: fs.readFileSync("./key.pem"),
-  cert: fs.readFileSync("./cert.pem"),
-};
+let httpsOptions = {};
+
+try {
+  httpsOptions = {
+    key: fs.readFileSync("./key.pem"),
+    cert: fs.readFileSync("./cert.pem"),
+  };
+} catch (err) {
+  console.log(
+    "Missing SSL keys. You will not be able to run this app in production mode."
+  );
+}
 
 const corsOptions = {
   origin: "https://ec2-54-175-236-193.compute-1.amazonaws.com",
