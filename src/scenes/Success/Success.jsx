@@ -1,5 +1,7 @@
 import useAuth from "../../hooks/useAuth";
 import SummaryItem from "../../components/SummaryItem/SummaryItem";
+import axios from "../../api/axios";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Success.css";
@@ -14,14 +16,10 @@ export default function Success() {
       const getCart = async () => {
         try {
           const response = await axios("/api/cart");
-          console.log(response?.data);
           setCart(response.data);
-          toast.success("Successfully retreived Cart!");
           setIsLoading(false);
           // eslint-disable-next-line
           const deleteResponse = await axios.delete("/api/cart");
-          console.log(deleteResponse?.data);
-          toast.success("Successfully cleared cart from database!");
         } catch (err) {
           if (!err?.response) {
             toast.error("Server Connection Timed Out");
