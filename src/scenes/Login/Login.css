@@ -1,85 +1,20 @@
-.login-return-home {
-  position: fixed;
-  top: 10px;
-  left: 5px;
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+::selection {
+  color: #fff;
+  background: #5372f0;
 }
-
-.login-page {
-  font-family: "Roboto", "sans-serif";
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+form .field input:focus,
+form .field.valid input {
+  border-color: #5372f0;
 }
-
-.login-container {
-  background-color: white;
-  border-radius: 0.5rem;
-  width: 400px;
+form .field.shake input,
+form .field.error input {
+  border-color: #dc3545;
 }
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2em 2em;
+form input::placeholder {
+  color: #bfbfbf;
+  font-size: 17px;
 }
-
-.login-title {
-  color: #084887;
-  font-weight: 900;
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-
-.form-section:has(#email) {
-  margin-bottom: 15px;
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-bottom: 2px solid rgba(100, 100, 100, 0.2);
-}
-
-.form-input:focus .form-section {
-  border-bottom: 2px solid black;
-}
-
-.form-section label {
-  line-height: 1rem;
-  color: black;
-  font-size: 0.8rem;
-  font-weight: 400;
-}
-
-.form-input {
-  font-size: 1rem;
-  padding: 1em 1em;
-  border: none;
-}
-
-.form-forgot-pass {
-  color: black;
-  font-size: 0.8rem;
-  text-align: right;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.form-btn {
-  background: linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55);
-  width: 100%;
-  padding: 1em 2em;
-  border: none;
-  border-radius: 2rem;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.form-btn:hover {
-  outline: 1px solid yellow;
-  color: yellow;
+form input[type="submit"]:hover {
+  background: #142d91;
 }

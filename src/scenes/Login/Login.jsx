@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import "./Login.css";
@@ -67,55 +67,188 @@ export default function Login() {
   };
 
   return (
-    <section className="login-page">
-      <Link to="/" className="login-return-home">
-        Return Home
-      </Link>
-      <div className="login-container">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <h1 className="login-title">Login</h1>
-          <span ref={errRef} aria-live="assertive">
-            {errMsg}
-          </span>
-          <span>{success}</span>
-          <div className="form-section">
-            <label htmlFor="email">E-Mail</label>
-            <input
-              ref={userRef}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              className="form-input"
-              name="email"
-              type="email"
-              autoCapitalize="false"
-              autoCorrect="false"
-              autoFocus
-              placeholder="Type your email"
-              required
-            />
-          </div>
-          <div className="form-section">
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={(e) => setPass(e.target.value)}
-              id="password"
-              className="form-input"
-              name="password"
-              type="password"
-              autoCapitalize="false"
-              autoCorrect="false"
-              placeholder="Type your password"
-              required
-            />
-          </div>
-          <Link to="/" className="form-forgot-pass">
-            Forgot password?
+    <div
+      className="login-container"
+      style={{
+        margin: ".01em 25em",
+        boxSizing: "border-box",
+        width: "45%",
+        height: "10vh",
+        background: "transparent",
+        padding: "40px 45px 50px",
+      }}
+    >
+      <form
+        className="login-form"
+        onSubmit={handleSubmit}
+        style={{
+          background: "#fff",
+          padding: "40px 30px 50px 30px",
+          borderRadius: "5px",
+          textAlign: "center",
+          boxShadow: "10px 10px 15px rgba(0,0,0,0.1)",
+        }}
+      >
+        <h1
+          className="login-title"
+          style={{
+            fontSize: "40px",
+            fontWeight: "600",
+            color: "#084887",
+            fontFamily: "Fredoka One",
+            textShadow: "1px 3px 4px #909CC2",
+          }}
+        >
+          Login
+        </h1>
+        <h2
+          className="login-subtitle"
+          style={{
+            color: "black",
+            padding: "1em",
+          }}
+        >
+          Please enter your email and password
+        </h2>
+        <span ref={errRef} aria-live="assertive">
+          {errMsg}
+        </span>
+        <span>{success}</span>
+        <div
+          className="form-section"
+          style={{
+            width: "100%",
+            marginBottom: "20px",
+            Animation: "shake 0.3s ease-in-out",
+            color: "black",
+          }}
+        >
+          <label htmlFor="email"></label>
+          <input
+            ref={userRef}
+            onChange={(e) => setEmail(e.target.value)}
+            id="email"
+            className="form-input"
+            name="email"
+            type="email"
+            autoCapitalize="false"
+            autoCorrect="false"
+            autoFocus
+            required
+            placeholder="Email Address"
+            style={{
+              width: "55%",
+              height: "100%",
+              outline: "none",
+              padding: "10px 30px 10px 30px",
+              fontSize: "18px",
+              background: "none",
+              caretColor: "#5372F0",
+              borderRadius: "5px",
+              border: "1px solid #bfbfbf",
+              borderBottomWidth: "2px",
+              transition: "all 0.2s ease",
+            }}
+          />
+        </div>
+        <div
+          className="form-section"
+          style={{
+            width: "100%",
+            marginBottom: "30px",
+            Animation: "shake 0.3s ease-in-out",
+            color: "black",
+          }}
+        >
+          <label htmlFor="password"></label>
+          <input
+            onChange={(e) => setPass(e.target.value)}
+            id="password"
+            className="form-input"
+            name="password"
+            type="password"
+            autoCapitalize="false"
+            autoCorrect="false"
+            required
+            placeholder="Password"
+            style={{
+              width: "55%",
+              marginTop: "1em",
+              height: "100%",
+              outline: "none",
+              padding: "10px 30px 10px 30px",
+              fontSize: "18px",
+              background: "none",
+              caretColor: "#5372F0",
+              borderRadius: "5px",
+              border: "1px solid #bfbfbf",
+              borderBottomWidth: "2px",
+              transition: "all 0.2s ease",
+            }}
+          />
+        </div>
+        <button
+          style={{
+            height: "50px",
+            marginTop: "25px",
+            color: "#fff",
+            padding: "0 2em 0 2em",
+            border: "none",
+            background: "#5372F0",
+            cursor: "pointer",
+            borderBottom: "2px solid rgba(0,0,0,0.1)",
+            transition: "all 0.3s ease",
+            fontSize: "1em",
+            fontFamily: "Tahoma",
+            marginLeft: "3em",
+            borderRadius: ".5em",
+            textDecoration: "none",
+          }}
+          type="submit"
+          className="form-btn"
+        >
+          Sign-In
+        </button>
+
+        <label
+          style={{
+            color: "black",
+            marginRight: "-4.5em",
+            marginLeft: "5em",
+          }}
+        >
+          Not A Member?
+        </label>
+        <button
+          style={{
+            height: "50px",
+            marginTop: "25px",
+            fontcolor: "#fff",
+            padding: "0 2em 0 2em",
+            border: "none",
+            background: "#5372F0",
+            cursor: "pointer",
+            borderBottom: "2px solid rgba(0,0,0,0.1)",
+            transition: "all 0.3s ease",
+            fontSize: "1em",
+            fontFamily: "Tahoma",
+            marginLeft: "5em",
+            borderRadius: ".5em",
+            textDecoration: "none",
+          }}
+          type="submit"
+          className="form-btn"
+        >
+          <Link
+            to="/register"
+            style={{
+              color: "#fff",
+            }}
+          >
+            Sign-Up
           </Link>
-          <button type="submit" className="form-btn">
-            LOGIN
-          </button>
-        </form>
-      </div>
-    </section>
+        </button>
+      </form>
+    </div>
   );
 }
