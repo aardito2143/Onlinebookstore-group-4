@@ -12,7 +12,7 @@ export default function Checkout() {
   if (process.env.NODE_ENV === "development") {
     BASE_URL = "http://localhost:3000";
   } else {
-    BASE_URL = "https://ec2-54-175-236-193.compute-1.amazonaws.com:3000";
+    BASE_URL = "https://ec2-54-175-236-193.compute-1.amazonaws.com";
   }
 
   async function handleCheckout() {
