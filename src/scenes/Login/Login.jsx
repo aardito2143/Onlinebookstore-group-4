@@ -70,12 +70,17 @@ export default function Login() {
     <div
       className="login-container"
       style={{
-        margin: ".01em 25em",
+        display: "flex",
+        margin: "-2.5em 32em ",
         boxSizing: "border-box",
-        width: "45%",
-        height: "10vh",
+        width: "400px",
+        height: "100%",
         background: "transparent",
-        padding: "40px 45px 50px",
+        padding: "0",
+
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "Roboto",
       }}
     >
       <form
@@ -83,23 +88,38 @@ export default function Login() {
         onSubmit={handleSubmit}
         style={{
           background: "#fff",
-          padding: "40px 30px 50px 30px",
+          padding: "2em 2em",
           borderRadius: "5px",
           textAlign: "center",
           boxShadow: "10px 10px 15px rgba(0,0,0,0.1)",
+          display: "flex",
+          flexDirection: "column",
+          alighnItems: "center",
         }}
       >
+        <a
+          style={{
+            color: "black",
+            marginLeft: "-20em",
+            marginTop: "-3.5em",
+          }}
+          className="form-forgot-pass"
+          href="/"
+        >
+          Return to Home
+        </a>
         <h1
           className="login-title"
           style={{
-            fontSize: "40px",
-            fontWeight: "600",
+            fontSize: "2em",
+            fontWeight: "900",
             color: "#084887",
             fontFamily: "Fredoka One",
-            textShadow: "1px 3px 4px #909CC2",
+            textShadow: "1px 2px 0px #909CC2",
+            margin: "30px",
           }}
         >
-          Login
+          Log In
         </h1>
         <h2
           className="login-subtitle"
@@ -119,11 +139,20 @@ export default function Login() {
           style={{
             width: "100%",
             marginBottom: "20px",
-            Animation: "shake 0.3s ease-in-out",
             color: "black",
+            display: "flex",
+            flexDirection: "column",
+            borderBottom: "2px solid rgba(100, 100, 100, 0.2)",
           }}
         >
-          <label htmlFor="email"></label>
+          <label
+            htmlFor="email"
+            style={{
+              marginBottom: "15px",
+            }}
+          >
+            {" "}
+          </label>
           <input
             ref={userRef}
             onChange={(e) => setEmail(e.target.value)}
@@ -135,17 +164,17 @@ export default function Login() {
             autoCorrect="false"
             autoFocus
             required
-            placeholder="Email Address"
+            placeholder="Enter your email"
             style={{
               width: "55%",
               height: "100%",
               outline: "none",
-              padding: "10px 30px 10px 30px",
-              fontSize: "18px",
+              padding: "10px 10px 10px 10px",
+              fontSize: "14px",
               background: "none",
               caretColor: "#5372F0",
               borderRadius: "5px",
-              border: "1px solid #bfbfbf",
+              border: "none",
               borderBottomWidth: "2px",
               transition: "all 0.2s ease",
             }}
@@ -156,7 +185,6 @@ export default function Login() {
           style={{
             width: "100%",
             marginBottom: "30px",
-            Animation: "shake 0.3s ease-in-out",
             color: "black",
           }}
         >
@@ -170,51 +198,66 @@ export default function Login() {
             autoCapitalize="false"
             autoCorrect="false"
             required
-            placeholder="Password"
+            placeholder="Enter a password"
             style={{
               width: "55%",
               marginTop: "1em",
               height: "100%",
               outline: "none",
-              padding: "10px 30px 10px 30px",
-              fontSize: "18px",
+              padding: "10px 30px 10px 10px",
+              fontSize: "14px",
               background: "none",
               caretColor: "#5372F0",
               borderRadius: "5px",
-              border: "1px solid #bfbfbf",
+              border: "none",
               borderBottomWidth: "2px",
               transition: "all 0.2s ease",
             }}
           />
         </div>
+        <a
+          style={{
+            color: "black",
+            marginRight: "-5em",
+            marginTop: "-2em",
+            marginBottom: "5em",
+          }}
+          className="form-forgot-pass"
+          href="/"
+        >
+          Forgot password?
+        </a>
         <button
           style={{
             height: "50px",
-            marginTop: "25px",
+            marginTop: "1px",
             color: "#fff",
             padding: "0 2em 0 2em",
             border: "none",
-            background: "#5372F0",
+            background:
+              "linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55)",
             cursor: "pointer",
             borderBottom: "2px solid rgba(0,0,0,0.1)",
             transition: "all 0.3s ease",
             fontSize: "1em",
             fontFamily: "Tahoma",
-            marginLeft: "3em",
+            marginLeft: ".5em",
             borderRadius: ".5em",
             textDecoration: "none",
           }}
           type="submit"
           className="form-btn"
         >
-          Sign-In
+          Log In
         </button>
 
         <label
           style={{
             color: "black",
-            marginRight: "-4.5em",
-            marginLeft: "5em",
+            marginRight: "-2em",
+            marginLeft: "em",
+            marginTop: "3em",
+            fontSize: ".6em",
           }}
         >
           Not A Member?
@@ -222,17 +265,18 @@ export default function Login() {
         <button
           style={{
             height: "50px",
-            marginTop: "25px",
+            marginTop: "2px",
             fontcolor: "#fff",
             padding: "0 2em 0 2em",
             border: "none",
-            background: "#5372F0",
+            background:
+              "linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55)",
             cursor: "pointer",
             borderBottom: "2px solid rgba(0,0,0,0.1)",
             transition: "all 0.3s ease",
             fontSize: "1em",
             fontFamily: "Tahoma",
-            marginLeft: "5em",
+            marginLeft: ".5em",
             borderRadius: ".5em",
             textDecoration: "none",
           }}
@@ -243,6 +287,7 @@ export default function Login() {
             to="/register"
             style={{
               color: "#fff",
+              fontWeight: "700",
             }}
           >
             Sign-Up

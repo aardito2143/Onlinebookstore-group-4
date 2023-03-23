@@ -3,19 +3,19 @@
   color: #fff;
   background: #5372f0;
 }
-.login-page {
+.register-page {
   font-family: "Roboto", "sans-serif";
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.login-container {
-  background-color: white;
-  border-radius: 0.5rem;
-  width: 400px;
+.register-return-home {
+  position: fixed;
+  top: 10px;
+  left: 5px;
 }
-.login-container {
+.register-container {
   background-color: white;
   border-radius: 0.5rem;
   width: 400px;
@@ -42,13 +42,6 @@
   font-size: 1rem;
   padding: 1em 1em;
   border: none;
-}
-.form-forgot-pass {
-  color: black;
-  font-size: 0.8rem;
-  text-align: right;
-  width: 100%;
-  margin-bottom: 20px;
 }
 .form-btn {
   background: linear-gradient(90deg, #909cc2, #084887, #f58a07, #f9ab55);

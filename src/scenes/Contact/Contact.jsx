@@ -1,45 +1,45 @@
 import "./Contact.css";
 
-export default function Contact () {
-    return (
-        <div class="container">
-        <div class="text">Contact Us</div>
-        <form action="#">
-           <div class="form-row">
-              <div class="input-data">
-                 <input type="text" required />
-                 <div class="underline"></div>
-                 <label for="">First Name</label>
+export default function Contact() {
+  return (
+    <div className="container">
+      <div className="text">Contact Us</div>
+      <form action="#">
+        <div className="form-row">
+          <div className="input-data">
+            <input type="text" required />
+            <div className="underline"></div>
+            <label htmlFor="">First Name</label>
+          </div>
+          <div className="input-data">
+            <input type="text" required />
+            <div className="underline"></div>
+            <label htmlFor="">Last Name</label>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="input-data">
+            <input type="text" required />
+            <div className="underline"></div>
+            <label htmlFor="">Email Address</label>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="input-data textarea">
+            <textarea rows="8" cols="80" required></textarea>
+            <br />
+            <div className="underline"></div>
+            <label htmlFor="">Write your message</label>
+            <br />
+            <div className="form-row submit-btn">
+              <div className="input-data">
+                <div className="inner"></div>
+                <input type="submit" value="submit" />
               </div>
-              <div class="input-data">
-                 <input type="text" required />
-                 <div class="underline"></div>
-                 <label for="">Last Name</label>
-              </div>
-           </div>
-           <div class="form-row">
-              <div class="input-data">
-                 <input type="text" required />
-                 <div class="underline"></div>
-                 <label for="">Email Address</label>
-              </div>
-           </div>
-           <div class="form-row">
-              <div class="input-data textarea">
-                 <textarea rows="8" cols="80" required></textarea>
-                 <br />
-                 <div class="underline"></div>
-                 <label for="">Write your message</label>
-                 <br />
-                 <div class="form-row submit-btn">
-                    <div class="input-data">
-                       <div class="inner"></div>
-                       <input type="submit" value="submit" />
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </form>
-     </div>
-    )
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }

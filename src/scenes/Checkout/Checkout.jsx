@@ -35,9 +35,6 @@ export default function Checkout() {
 
   return (
     <div id="w">
-      <header id="title">
-        <h1>Mystery Inc. Bookstore Cart</h1>
-      </header>
       <div id="page">
         {cart && cart.length > 0 ? (
           <table id="cart">
