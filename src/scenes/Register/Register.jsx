@@ -104,7 +104,7 @@ export default function Register() {
             marginLeft: "-20em",
             marginTop: "-3.5em",
           }}
-          class="form-forgot-pass"
+          className="form-forgot-pass"
           href="/"
         >
           Return to Home
@@ -292,7 +292,7 @@ export default function Register() {
             marginLeft: ".5em",
             borderRadius: ".5em",
           }}
-          type="submit"
+          type="button"
           className="form-btn"
         >
           <Link

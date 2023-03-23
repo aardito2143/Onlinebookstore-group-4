@@ -103,7 +103,7 @@ export default function Login() {
             marginLeft: "-20em",
             marginTop: "-3.5em",
           }}
-          class="form-forgot-pass"
+          className="form-forgot-pass"
           href="/"
         >
           Return to Home
@@ -222,7 +222,7 @@ export default function Login() {
             marginTop: "-2em",
             marginBottom: "5em",
           }}
-          class="form-forgot-pass"
+          className="form-forgot-pass"
           href="/"
         >
           Forgot password?

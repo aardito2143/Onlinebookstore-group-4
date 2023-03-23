@@ -2,9 +2,9 @@ import "./About.css";
 
 export default function About() {
   return (
-    <section class="about-us">
-      <div class="about">
-        <div class="about-text">
+    <section className="about-us">
+      <div className="about">
+        <div className="about-text">
           <h2>Meet The Team</h2>
           <h5>Mystery Inc. Bookstore Team </h5>
           <p>TaeAjah Cannon-Barnes - Project Manager | UI/UX Designer</p>
@@ -13,8 +13,8 @@ export default function About() {
           <p>
             Daniel Bevan - Developer | Backend Infrastructure | React Components
           </p>
-          <div class="data">
-            <a href="./contact-us" class="contact-btn">
+          <div className="data">
+            <a href="./contact-us" className="contact-btn">
               Contact Us
             </a>
           </div>
