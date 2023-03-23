@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+::selection{
+    color: #fff;
+    background: #5372F0;
+  }
+  form .field input:focus,
+form .field.valid input{
+  border-color: #5372F0;
+}
+form .field.shake input,
+form .field.error input{
+  border-color: #dc3545;
+}
+form input::placeholder{
+    color: #bfbfbf;
+    font-size: 17px;
+  }
+  form input[type="submit"]:hover{
+    background: #142d91;
+  }
+  
